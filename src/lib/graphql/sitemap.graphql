@@ -1,5 +1,5 @@
 fragment sitemapPagesFields on Query {
-  pageBlogPostCollection(limit: 100, locale: $locale) {
+  pageHeroCollection(limit: 100, locale: $locale) {
     items {
       slug
       sys {

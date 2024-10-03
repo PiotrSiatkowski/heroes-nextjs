@@ -1,0 +1,102 @@
+fragment ReferencePageHeroFields on PageHero {
+  __typename
+  sys {
+    id
+    spaceId
+  }
+  slug
+  author {
+    ...AuthorFields
+  }
+  publishedDate
+  name
+  description
+  featuredImage {
+    ...ImageFields
+  }
+}
+
+fragment PageHeroFields on PageHero {
+  __typename
+  sys {
+    id
+    spaceId
+  }
+  internalName
+  seoFields {
+    ...SeoFields
+  }
+  slug
+  author {
+    ...AuthorFields
+  }
+  publishedDate
+  name
+  description
+  featuredImage {
+    ...ImageFields
+  }
+  avatar {
+    ...ImageFields
+  }
+  skill1Image {
+    ...ImageFields
+  }
+  skill2Image {
+    ...ImageFields
+  }
+  skill3Image {
+    ...ImageFields
+  }
+  skill4Image {
+    ...ImageFields
+  }
+  skill1Description {
+    json
+    links {
+      entries {
+        block {
+          ...RichImageFields
+        }
+      }
+    }
+  }
+  skill2Description {
+    json
+    links {
+      entries {
+        block {
+          ...RichImageFields
+        }
+      }
+    }
+  }
+  skill3Description {
+    json
+    links {
+      entries {
+        block {
+          ...RichImageFields
+        }
+      }
+    }
+  }
+  skill4Description {
+    json
+    links {
+      entries {
+        block {
+          ...RichImageFields
+        }
+      }
+    }
+  }
+}
+
+query pageHero($slug: String!, $locale: String, $preview: Boolean) {
+  pageHeroCollection(limit: 1, where: { slug: $slug }, locale: $locale, preview: $preview) {
+    items {
+      ...PageHeroFields
+    }
+  }
+}

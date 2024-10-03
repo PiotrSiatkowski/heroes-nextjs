@@ -1,0 +1,13 @@
+query pageHeroCollection(
+  $locale: String
+  $preview: Boolean
+  $limit: Int
+  $order: [PageHeroOrder]
+  $where: PageHeroFilter
+) {
+  pageHeroCollection(limit: $limit, locale: $locale, preview: $preview, order: $order where: $where) {
+    items {
+      ...PageHeroFields
+    }
+  }
+}

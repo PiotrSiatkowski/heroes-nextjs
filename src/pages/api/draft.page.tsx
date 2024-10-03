@@ -34,15 +34,15 @@ export default async (req, res) => {
   // Check for a slug, if no slug is passed we assume we need to redirect to the root
   if (slug) {
     try {
-      const blogPageData = await previewClient.pageBlogPost({
+      const heroData = await previewClient.pageHero({
         slug,
         locale,
         preview: true,
       });
 
-      const blogPost = blogPageData.pageBlogPostCollection?.items[0];
+      const hero = heroData.pageHeroCollection?.items[0];
 
-      if (!blogPost) {
+      if (!hero) {
         throw Error();
       }
 
@@ -50,7 +50,7 @@ export default async (req, res) => {
       enableDraftMode(res);
 
       // Redirect to the path from the fetched post
-      res.redirect(`/${locale ? `${locale}/` : ''}${blogPost?.slug}`);
+      res.redirect(`/${locale ? `${locale}/` : ''}${hero?.slug}`);
     } catch {
       return res.status(401).json({ message: 'Invalid slug' });
     }

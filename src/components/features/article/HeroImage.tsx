@@ -4,11 +4,11 @@ import { twMerge } from 'tailwind-merge';
 import { CtfImage } from '@src/components/features/contentful';
 import { ComponentRichImage } from '@src/lib/__generated/sdk';
 
-interface ArticleImageProps {
+interface Props {
   image: ComponentRichImage;
 }
 
-export const ArticleImage = ({ image }: ArticleImageProps) => {
+export const HeroImage = ({ image }: Props) => {
   const inspectorProps = useContentfulInspectorMode({ entryId: image.sys.id });
   return image.image ? (
     <figure>

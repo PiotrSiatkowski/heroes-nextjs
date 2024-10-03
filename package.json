@@ -17,6 +17,11 @@
     "graphql-codegen:watch": "graphql-codegen --watch -r dotenv/config --config codegen.ts",
     "setup": "./bin/setup.sh"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --write . && git add -A ."
+    }
+  },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
       "eslint --quiet --fix"

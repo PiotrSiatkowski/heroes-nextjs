@@ -1,3 +1,5 @@
+directive @contentSourceMaps on QUERY
+
 """Represents a binary file in a space. An asset can be any file type."""
 type Asset {
   contentType(locale: String): String
@@ -94,7 +96,7 @@ type AssetLinkingCollections {
   componentRichImageCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentRichImageCollection
   componentSeoCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): ComponentSeoCollection
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageBlogPostCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageBlogPostCollection
+  pageHeroCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageHeroCollection
 }
 
 enum AssetOrder {
@@ -121,9 +123,10 @@ enum AssetOrder {
 }
 
 """
-To have author-related properties [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentAuthor)
+To have author-related properties [See type definition](https://app.contentful.com/spaces/9md11hz3a4q5/content_types/componentAuthor)
 """
-type ComponentAuthor implements Entry {
+type ComponentAuthor implements Entry & _Node {
+  _id: ID!
   avatar(locale: String, preview: Boolean): Asset
   contentfulMetadata: ContentfulMetadata!
   internalName(locale: String): String
@@ -163,7 +166,44 @@ input ComponentAuthorFilter {
 
 type ComponentAuthorLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageBlogPostCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageBlogPostCollection
+  pageHeroCollection(limit: Int = 100, locale: String, order: [ComponentAuthorLinkingCollectionsPageHeroCollectionOrder], preview: Boolean, skip: Int = 0): PageHeroCollection
+}
+
+enum ComponentAuthorLinkingCollectionsPageHeroCollectionOrder {
+  agiGain_ASC
+  agiGain_DESC
+  agi_ASC
+  agi_DESC
+  attribute_ASC
+  attribute_DESC
+  intGain_ASC
+  intGain_DESC
+  int_ASC
+  int_DESC
+  internalName_ASC
+  internalName_DESC
+  name_ASC
+  name_DESC
+  publishedDate_ASC
+  publishedDate_DESC
+  range_ASC
+  range_DESC
+  slug_ASC
+  slug_DESC
+  speed_ASC
+  speed_DESC
+  strGain_ASC
+  strGain_DESC
+  str_ASC
+  str_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum ComponentAuthorOrder {
@@ -182,9 +222,10 @@ enum ComponentAuthorOrder {
 }
 
 """
-To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentRichImage)
+To describe an image used in rich text fields [See type definition](https://app.contentful.com/spaces/9md11hz3a4q5/content_types/componentRichImage)
 """
-type ComponentRichImage implements Entry {
+type ComponentRichImage implements Entry & _Node {
+  _id: ID!
   caption(locale: String): String
   contentfulMetadata: ContentfulMetadata!
   fullWidth(locale: String): Boolean
@@ -248,9 +289,10 @@ enum ComponentRichImageOrder {
 }
 
 """
-To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/componentSeo)
+To have SEO-related properties to the pages we render [See type definition](https://app.contentful.com/spaces/9md11hz3a4q5/content_types/componentSeo)
 """
-type ComponentSeo implements Entry {
+type ComponentSeo implements Entry & _Node {
+  _id: ID!
   canonicalUrl(locale: String): String
   contentfulMetadata: ContentfulMetadata!
   internalName(locale: String): String
@@ -314,8 +356,58 @@ input ComponentSeoFilter {
 
 type ComponentSeoLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageBlogPostCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageBlogPostCollection
-  pageLandingCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageLandingCollection
+  pageHeroCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageHeroCollectionOrder], preview: Boolean, skip: Int = 0): PageHeroCollection
+  pageLandingCollection(limit: Int = 100, locale: String, order: [ComponentSeoLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
+}
+
+enum ComponentSeoLinkingCollectionsPageHeroCollectionOrder {
+  agiGain_ASC
+  agiGain_DESC
+  agi_ASC
+  agi_DESC
+  attribute_ASC
+  attribute_DESC
+  intGain_ASC
+  intGain_DESC
+  int_ASC
+  int_DESC
+  internalName_ASC
+  internalName_DESC
+  name_ASC
+  name_DESC
+  publishedDate_ASC
+  publishedDate_DESC
+  range_ASC
+  range_DESC
+  slug_ASC
+  slug_DESC
+  speed_ASC
+  speed_DESC
+  strGain_ASC
+  strGain_DESC
+  str_ASC
+  str_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+enum ComponentSeoLinkingCollectionsPageLandingCollectionOrder {
+  internalName_ASC
+  internalName_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
 }
 
 enum ComponentSeoOrder {
@@ -356,7 +448,7 @@ input ContentfulMetadataTagsFilter {
 
 """
 Represents a tag entity for finding and organizing content easily.
-    Find out more here: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/content-tags
+      Find out more here: https://www.contentful.com/developers/docs/references/content-delivery-api/#/reference/content-tags
 """
 type ContentfulTag {
   id: String
@@ -543,62 +635,106 @@ The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://
 scalar JSON
 
 """
-To create individual blog posts [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageBlogPost)
+Individual hero description data. [See type definition](https://app.contentful.com/spaces/9md11hz3a4q5/content_types/pageHero)
 """
-type PageBlogPost implements Entry {
-  author(locale: String, preview: Boolean): ComponentAuthor
-  content(locale: String): PageBlogPostContent
+type PageHero implements Entry & _Node {
+  _id: ID!
+  agi(locale: String): Int
+  agiGain(locale: String): Float
+  attribute(locale: String): String
+  author(locale: String, preview: Boolean, where: ComponentAuthorFilter): ComponentAuthor
+  avatar(locale: String, preview: Boolean): Asset
   contentfulMetadata: ContentfulMetadata!
+  description(locale: String): String
   featuredImage(locale: String, preview: Boolean): Asset
+  int(locale: String): Int
+  intGain(locale: String): Float
   internalName(locale: String): String
-  linkedFrom(allowedLocales: [String]): PageBlogPostLinkingCollections
+  linkedFrom(allowedLocales: [String]): PageHeroLinkingCollections
+  name(locale: String): String
   publishedDate(locale: String): DateTime
-  relatedBlogPostsCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageBlogPostRelatedBlogPostsCollection
-  seoFields(locale: String, preview: Boolean): ComponentSeo
-  shortDescription(locale: String): String
+  range(locale: String): Int
+  seoFields(locale: String, preview: Boolean, where: ComponentSeoFilter): ComponentSeo
+  skill1Description(locale: String): PageHeroSkill1Description
+  skill1Image(locale: String, preview: Boolean): Asset
+  skill2Description(locale: String): PageHeroSkill2Description
+  skill2Image(locale: String, preview: Boolean): Asset
+  skill3Description(locale: String): PageHeroSkill3Description
+  skill3Image(locale: String, preview: Boolean): Asset
+  skill4Description(locale: String): PageHeroSkill4Description
+  skill4Image(locale: String, preview: Boolean): Asset
   slug(locale: String): String
+  speed(locale: String): Int
+  str(locale: String): Int
+  strGain(locale: String): Float
   sys: Sys!
-  title(locale: String): String
 }
 
-type PageBlogPostCollection {
-  items: [PageBlogPost]!
+type PageHeroCollection {
+  items: [PageHero]!
   limit: Int!
   skip: Int!
   total: Int!
 }
 
-type PageBlogPostContent {
-  json: JSON!
-  links: PageBlogPostContentLinks!
-}
-
-type PageBlogPostContentAssets {
-  block: [Asset]!
-  hyperlink: [Asset]!
-}
-
-type PageBlogPostContentEntries {
-  block: [Entry]!
-  hyperlink: [Entry]!
-  inline: [Entry]!
-}
-
-type PageBlogPostContentLinks {
-  assets: PageBlogPostContentAssets!
-  entries: PageBlogPostContentEntries!
-}
-
-input PageBlogPostFilter {
-  AND: [PageBlogPostFilter]
-  OR: [PageBlogPostFilter]
+input PageHeroFilter {
+  AND: [PageHeroFilter]
+  OR: [PageHeroFilter]
+  agi: Int
+  agiGain: Float
+  agiGain_exists: Boolean
+  agiGain_gt: Float
+  agiGain_gte: Float
+  agiGain_in: [Float]
+  agiGain_lt: Float
+  agiGain_lte: Float
+  agiGain_not: Float
+  agiGain_not_in: [Float]
+  agi_exists: Boolean
+  agi_gt: Int
+  agi_gte: Int
+  agi_in: [Int]
+  agi_lt: Int
+  agi_lte: Int
+  agi_not: Int
+  agi_not_in: [Int]
+  attribute: String
+  attribute_contains: String
+  attribute_exists: Boolean
+  attribute_in: [String]
+  attribute_not: String
+  attribute_not_contains: String
+  attribute_not_in: [String]
   author: cfComponentAuthorNestedFilter
   author_exists: Boolean
-  content_contains: String
-  content_exists: Boolean
-  content_not_contains: String
+  avatar_exists: Boolean
   contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
   featuredImage_exists: Boolean
+  int: Int
+  intGain: Float
+  intGain_exists: Boolean
+  intGain_gt: Float
+  intGain_gte: Float
+  intGain_in: [Float]
+  intGain_lt: Float
+  intGain_lte: Float
+  intGain_not: Float
+  intGain_not_in: [Float]
+  int_exists: Boolean
+  int_gt: Int
+  int_gte: Int
+  int_in: [Int]
+  int_lt: Int
+  int_lte: Int
+  int_not: Int
+  int_not_in: [Int]
   internalName: String
   internalName_contains: String
   internalName_exists: Boolean
@@ -606,6 +742,13 @@ input PageBlogPostFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  name: String
+  name_contains: String
+  name_exists: Boolean
+  name_in: [String]
+  name_not: String
+  name_not_contains: String
+  name_not_in: [String]
   publishedDate: DateTime
   publishedDate_exists: Boolean
   publishedDate_gt: DateTime
@@ -615,17 +758,33 @@ input PageBlogPostFilter {
   publishedDate_lte: DateTime
   publishedDate_not: DateTime
   publishedDate_not_in: [DateTime]
-  relatedBlogPosts: cfPageBlogPostNestedFilter
-  relatedBlogPostsCollection_exists: Boolean
+  range: Int
+  range_exists: Boolean
+  range_gt: Int
+  range_gte: Int
+  range_in: [Int]
+  range_lt: Int
+  range_lte: Int
+  range_not: Int
+  range_not_in: [Int]
   seoFields: cfComponentSeoNestedFilter
   seoFields_exists: Boolean
-  shortDescription: String
-  shortDescription_contains: String
-  shortDescription_exists: Boolean
-  shortDescription_in: [String]
-  shortDescription_not: String
-  shortDescription_not_contains: String
-  shortDescription_not_in: [String]
+  skill1Description_contains: String
+  skill1Description_exists: Boolean
+  skill1Description_not_contains: String
+  skill1Image_exists: Boolean
+  skill2Description_contains: String
+  skill2Description_exists: Boolean
+  skill2Description_not_contains: String
+  skill2Image_exists: Boolean
+  skill3Description_contains: String
+  skill3Description_exists: Boolean
+  skill3Description_not_contains: String
+  skill3Image_exists: Boolean
+  skill4Description_contains: String
+  skill4Description_exists: Boolean
+  skill4Description_not_contains: String
+  skill4Image_exists: Boolean
   slug: String
   slug_contains: String
   slug_exists: Boolean
@@ -633,29 +792,44 @@ input PageBlogPostFilter {
   slug_not: String
   slug_not_contains: String
   slug_not_in: [String]
+  speed: Int
+  speed_exists: Boolean
+  speed_gt: Int
+  speed_gte: Int
+  speed_in: [Int]
+  speed_lt: Int
+  speed_lte: Int
+  speed_not: Int
+  speed_not_in: [Int]
+  str: Int
+  strGain: Float
+  strGain_exists: Boolean
+  strGain_gt: Float
+  strGain_gte: Float
+  strGain_in: [Float]
+  strGain_lt: Float
+  strGain_lte: Float
+  strGain_not: Float
+  strGain_not_in: [Float]
+  str_exists: Boolean
+  str_gt: Int
+  str_gte: Int
+  str_in: [Int]
+  str_lt: Int
+  str_lte: Int
+  str_not: Int
+  str_not_in: [Int]
   sys: SysFilter
-  title: String
-  title_contains: String
-  title_exists: Boolean
-  title_in: [String]
-  title_not: String
-  title_not_contains: String
-  title_not_in: [String]
 }
 
-type PageBlogPostLinkingCollections {
+type PageHeroLinkingCollections {
   entryCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): EntryCollection
-  pageBlogPostCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageBlogPostCollection
-  pageLandingCollection(limit: Int = 100, locale: String, preview: Boolean, skip: Int = 0): PageLandingCollection
+  pageLandingCollection(limit: Int = 100, locale: String, order: [PageHeroLinkingCollectionsPageLandingCollectionOrder], preview: Boolean, skip: Int = 0): PageLandingCollection
 }
 
-enum PageBlogPostOrder {
+enum PageHeroLinkingCollectionsPageLandingCollectionOrder {
   internalName_ASC
   internalName_DESC
-  publishedDate_ASC
-  publishedDate_DESC
-  slug_ASC
-  slug_DESC
   sys_firstPublishedAt_ASC
   sys_firstPublishedAt_DESC
   sys_id_ASC
@@ -664,26 +838,215 @@ enum PageBlogPostOrder {
   sys_publishedAt_DESC
   sys_publishedVersion_ASC
   sys_publishedVersion_DESC
-  title_ASC
-  title_DESC
 }
 
-type PageBlogPostRelatedBlogPostsCollection {
-  items: [PageBlogPost]!
-  limit: Int!
-  skip: Int!
-  total: Int!
+enum PageHeroOrder {
+  agiGain_ASC
+  agiGain_DESC
+  agi_ASC
+  agi_DESC
+  attribute_ASC
+  attribute_DESC
+  intGain_ASC
+  intGain_DESC
+  int_ASC
+  int_DESC
+  internalName_ASC
+  internalName_DESC
+  name_ASC
+  name_DESC
+  publishedDate_ASC
+  publishedDate_DESC
+  range_ASC
+  range_DESC
+  slug_ASC
+  slug_DESC
+  speed_ASC
+  speed_DESC
+  strGain_ASC
+  strGain_DESC
+  str_ASC
+  str_DESC
+  sys_firstPublishedAt_ASC
+  sys_firstPublishedAt_DESC
+  sys_id_ASC
+  sys_id_DESC
+  sys_publishedAt_ASC
+  sys_publishedAt_DESC
+  sys_publishedVersion_ASC
+  sys_publishedVersion_DESC
+}
+
+type PageHeroSkill1Description {
+  json: JSON!
+  links: PageHeroSkill1DescriptionLinks!
+}
+
+type PageHeroSkill1DescriptionAssets {
+  block: [Asset]!
+  hyperlink: [Asset]!
+}
+
+type PageHeroSkill1DescriptionEntries {
+  block: [Entry]!
+  hyperlink: [Entry]!
+  inline: [Entry]!
+}
+
+type PageHeroSkill1DescriptionLinks {
+  assets: PageHeroSkill1DescriptionAssets!
+  entries: PageHeroSkill1DescriptionEntries!
+  resources: PageHeroSkill1DescriptionResources!
+}
+
+type PageHeroSkill1DescriptionResources {
+  block: [PageHeroSkill1DescriptionResourcesBlock!]!
+  hyperlink: [PageHeroSkill1DescriptionResourcesHyperlink!]!
+  inline: [PageHeroSkill1DescriptionResourcesInline!]!
+}
+
+type PageHeroSkill1DescriptionResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageHeroSkill1DescriptionResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageHeroSkill1DescriptionResourcesInline implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageHeroSkill2Description {
+  json: JSON!
+  links: PageHeroSkill2DescriptionLinks!
+}
+
+type PageHeroSkill2DescriptionAssets {
+  block: [Asset]!
+  hyperlink: [Asset]!
+}
+
+type PageHeroSkill2DescriptionEntries {
+  block: [Entry]!
+  hyperlink: [Entry]!
+  inline: [Entry]!
+}
+
+type PageHeroSkill2DescriptionLinks {
+  assets: PageHeroSkill2DescriptionAssets!
+  entries: PageHeroSkill2DescriptionEntries!
+  resources: PageHeroSkill2DescriptionResources!
+}
+
+type PageHeroSkill2DescriptionResources {
+  block: [PageHeroSkill2DescriptionResourcesBlock!]!
+  hyperlink: [PageHeroSkill2DescriptionResourcesHyperlink!]!
+  inline: [PageHeroSkill2DescriptionResourcesInline!]!
+}
+
+type PageHeroSkill2DescriptionResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageHeroSkill2DescriptionResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageHeroSkill2DescriptionResourcesInline implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageHeroSkill3Description {
+  json: JSON!
+  links: PageHeroSkill3DescriptionLinks!
+}
+
+type PageHeroSkill3DescriptionAssets {
+  block: [Asset]!
+  hyperlink: [Asset]!
+}
+
+type PageHeroSkill3DescriptionEntries {
+  block: [Entry]!
+  hyperlink: [Entry]!
+  inline: [Entry]!
+}
+
+type PageHeroSkill3DescriptionLinks {
+  assets: PageHeroSkill3DescriptionAssets!
+  entries: PageHeroSkill3DescriptionEntries!
+  resources: PageHeroSkill3DescriptionResources!
+}
+
+type PageHeroSkill3DescriptionResources {
+  block: [PageHeroSkill3DescriptionResourcesBlock!]!
+  hyperlink: [PageHeroSkill3DescriptionResourcesHyperlink!]!
+  inline: [PageHeroSkill3DescriptionResourcesInline!]!
+}
+
+type PageHeroSkill3DescriptionResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageHeroSkill3DescriptionResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageHeroSkill3DescriptionResourcesInline implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageHeroSkill4Description {
+  json: JSON!
+  links: PageHeroSkill4DescriptionLinks!
+}
+
+type PageHeroSkill4DescriptionAssets {
+  block: [Asset]!
+  hyperlink: [Asset]!
+}
+
+type PageHeroSkill4DescriptionEntries {
+  block: [Entry]!
+  hyperlink: [Entry]!
+  inline: [Entry]!
+}
+
+type PageHeroSkill4DescriptionLinks {
+  assets: PageHeroSkill4DescriptionAssets!
+  entries: PageHeroSkill4DescriptionEntries!
+  resources: PageHeroSkill4DescriptionResources!
+}
+
+type PageHeroSkill4DescriptionResources {
+  block: [PageHeroSkill4DescriptionResourcesBlock!]!
+  hyperlink: [PageHeroSkill4DescriptionResourcesHyperlink!]!
+  inline: [PageHeroSkill4DescriptionResourcesInline!]!
+}
+
+type PageHeroSkill4DescriptionResourcesBlock implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageHeroSkill4DescriptionResourcesHyperlink implements ResourceLink {
+  sys: ResourceSys!
+}
+
+type PageHeroSkill4DescriptionResourcesInline implements ResourceLink {
+  sys: ResourceSys!
 }
 
 """
-To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/nvxmqufxogry/content_types/pageLanding)
+To have an entry point for the app (e.g. Homepage) [See type definition](https://app.contentful.com/spaces/9md11hz3a4q5/content_types/pageLanding)
 """
-type PageLanding implements Entry {
+type PageLanding implements Entry & _Node {
+  _id: ID!
   contentfulMetadata: ContentfulMetadata!
-  featuredBlogPost(locale: String, preview: Boolean): PageBlogPost
+  featuredHero(locale: String, preview: Boolean, where: PageHeroFilter): PageHero
   internalName(locale: String): String
   linkedFrom(allowedLocales: [String]): PageLandingLinkingCollections
-  seoFields(locale: String, preview: Boolean): ComponentSeo
+  seoFields(locale: String, preview: Boolean, where: ComponentSeoFilter): ComponentSeo
   sys: Sys!
 }
 
@@ -698,8 +1061,8 @@ input PageLandingFilter {
   AND: [PageLandingFilter]
   OR: [PageLandingFilter]
   contentfulMetadata: ContentfulMetadataFilter
-  featuredBlogPost: cfPageBlogPostNestedFilter
-  featuredBlogPost_exists: Boolean
+  featuredHero: cfPageHeroNestedFilter
+  featuredHero_exists: Boolean
   internalName: String
   internalName_contains: String
   internalName_exists: Boolean
@@ -735,6 +1098,7 @@ The 'Quality' type represents quality as whole numeric values between `1` and `1
 scalar Quality
 
 type Query {
+  _node(id: ID!, locale: String, preview: Boolean): _Node
   asset(id: String!, locale: String, preview: Boolean): Asset
   assetCollection(limit: Int = 100, locale: String, order: [AssetOrder], preview: Boolean, skip: Int = 0, where: AssetFilter): AssetCollection
   componentAuthor(id: String!, locale: String, preview: Boolean): ComponentAuthor
@@ -744,16 +1108,28 @@ type Query {
   componentSeo(id: String!, locale: String, preview: Boolean): ComponentSeo
   componentSeoCollection(limit: Int = 100, locale: String, order: [ComponentSeoOrder], preview: Boolean, skip: Int = 0, where: ComponentSeoFilter): ComponentSeoCollection
   entryCollection(limit: Int = 100, locale: String, order: [EntryOrder], preview: Boolean, skip: Int = 0, where: EntryFilter): EntryCollection
-  pageBlogPost(id: String!, locale: String, preview: Boolean): PageBlogPost
-  pageBlogPostCollection(limit: Int = 100, locale: String, order: [PageBlogPostOrder], preview: Boolean, skip: Int = 0, where: PageBlogPostFilter): PageBlogPostCollection
+  pageHero(id: String!, locale: String, preview: Boolean): PageHero
+  pageHeroCollection(limit: Int = 100, locale: String, order: [PageHeroOrder], preview: Boolean, skip: Int = 0, where: PageHeroFilter): PageHeroCollection
   pageLanding(id: String!, locale: String, preview: Boolean): PageLanding
   pageLandingCollection(limit: Int = 100, locale: String, order: [PageLandingOrder], preview: Boolean, skip: Int = 0, where: PageLandingFilter): PageLandingCollection
+}
+
+interface ResourceLink {
+  sys: ResourceSys!
+}
+
+type ResourceSys {
+  linkType: String!
+  urn: String!
 }
 
 type Sys {
   environmentId: String!
   firstPublishedAt: DateTime
   id: String!
+
+  """The locale that was requested."""
+  locale: String
   publishedAt: DateTime
   publishedVersion: Int
   spaceId: String!
@@ -794,6 +1170,10 @@ input SysFilter {
   publishedVersion_lte: Float
   publishedVersion_not: Float
   publishedVersion_not_in: [Float]
+}
+
+interface _Node {
+  _id: ID!
 }
 
 input cfComponentAuthorNestedFilter {
@@ -860,15 +1240,63 @@ input cfComponentSeoNestedFilter {
   sys: SysFilter
 }
 
-input cfPageBlogPostNestedFilter {
-  AND: [cfPageBlogPostNestedFilter]
-  OR: [cfPageBlogPostNestedFilter]
+input cfPageHeroNestedFilter {
+  AND: [cfPageHeroNestedFilter]
+  OR: [cfPageHeroNestedFilter]
+  agi: Int
+  agiGain: Float
+  agiGain_exists: Boolean
+  agiGain_gt: Float
+  agiGain_gte: Float
+  agiGain_in: [Float]
+  agiGain_lt: Float
+  agiGain_lte: Float
+  agiGain_not: Float
+  agiGain_not_in: [Float]
+  agi_exists: Boolean
+  agi_gt: Int
+  agi_gte: Int
+  agi_in: [Int]
+  agi_lt: Int
+  agi_lte: Int
+  agi_not: Int
+  agi_not_in: [Int]
+  attribute: String
+  attribute_contains: String
+  attribute_exists: Boolean
+  attribute_in: [String]
+  attribute_not: String
+  attribute_not_contains: String
+  attribute_not_in: [String]
   author_exists: Boolean
-  content_contains: String
-  content_exists: Boolean
-  content_not_contains: String
+  avatar_exists: Boolean
   contentfulMetadata: ContentfulMetadataFilter
+  description: String
+  description_contains: String
+  description_exists: Boolean
+  description_in: [String]
+  description_not: String
+  description_not_contains: String
+  description_not_in: [String]
   featuredImage_exists: Boolean
+  int: Int
+  intGain: Float
+  intGain_exists: Boolean
+  intGain_gt: Float
+  intGain_gte: Float
+  intGain_in: [Float]
+  intGain_lt: Float
+  intGain_lte: Float
+  intGain_not: Float
+  intGain_not_in: [Float]
+  int_exists: Boolean
+  int_gt: Int
+  int_gte: Int
+  int_in: [Int]
+  int_lt: Int
+  int_lte: Int
+  int_not: Int
+  int_not_in: [Int]
   internalName: String
   internalName_contains: String
   internalName_exists: Boolean
@@ -876,6 +1304,13 @@ input cfPageBlogPostNestedFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  name: String
+  name_contains: String
+  name_exists: Boolean
+  name_in: [String]
+  name_not: String
+  name_not_contains: String
+  name_not_in: [String]
   publishedDate: DateTime
   publishedDate_exists: Boolean
   publishedDate_gt: DateTime
@@ -885,15 +1320,32 @@ input cfPageBlogPostNestedFilter {
   publishedDate_lte: DateTime
   publishedDate_not: DateTime
   publishedDate_not_in: [DateTime]
-  relatedBlogPostsCollection_exists: Boolean
+  range: Int
+  range_exists: Boolean
+  range_gt: Int
+  range_gte: Int
+  range_in: [Int]
+  range_lt: Int
+  range_lte: Int
+  range_not: Int
+  range_not_in: [Int]
   seoFields_exists: Boolean
-  shortDescription: String
-  shortDescription_contains: String
-  shortDescription_exists: Boolean
-  shortDescription_in: [String]
-  shortDescription_not: String
-  shortDescription_not_contains: String
-  shortDescription_not_in: [String]
+  skill1Description_contains: String
+  skill1Description_exists: Boolean
+  skill1Description_not_contains: String
+  skill1Image_exists: Boolean
+  skill2Description_contains: String
+  skill2Description_exists: Boolean
+  skill2Description_not_contains: String
+  skill2Image_exists: Boolean
+  skill3Description_contains: String
+  skill3Description_exists: Boolean
+  skill3Description_not_contains: String
+  skill3Image_exists: Boolean
+  skill4Description_contains: String
+  skill4Description_exists: Boolean
+  skill4Description_not_contains: String
+  skill4Image_exists: Boolean
   slug: String
   slug_contains: String
   slug_exists: Boolean
@@ -901,12 +1353,32 @@ input cfPageBlogPostNestedFilter {
   slug_not: String
   slug_not_contains: String
   slug_not_in: [String]
+  speed: Int
+  speed_exists: Boolean
+  speed_gt: Int
+  speed_gte: Int
+  speed_in: [Int]
+  speed_lt: Int
+  speed_lte: Int
+  speed_not: Int
+  speed_not_in: [Int]
+  str: Int
+  strGain: Float
+  strGain_exists: Boolean
+  strGain_gt: Float
+  strGain_gte: Float
+  strGain_in: [Float]
+  strGain_lt: Float
+  strGain_lte: Float
+  strGain_not: Float
+  strGain_not_in: [Float]
+  str_exists: Boolean
+  str_gt: Int
+  str_gte: Int
+  str_in: [Int]
+  str_lt: Int
+  str_lte: Int
+  str_not: Int
+  str_not_in: [Int]
   sys: SysFilter
-  title: String
-  title_contains: String
-  title_exists: Boolean
-  title_in: [String]
-  title_not: String
-  title_not_contains: String
-  title_not_in: [String]
 }

@@ -5,10 +5,14 @@ import Link from 'next/link';
 
 import { getServerSideTranslations } from './utils/get-serverside-translations';
 
-import { ArticleHero, ArticleTileGrid } from '@src/components/features/article';
+import { HeroView, HeroTileGrid } from '@src/components/features/article';
 import { SeoFields } from '@src/components/features/seo';
 import { Container } from '@src/components/shared/container';
-import { PageBlogPostOrder } from '@src/lib/__generated/sdk';
+import {
+  PageHeroFieldsFragment,
+  PageHeroOrder,
+  PageLandingFieldsFragment,
+} from '@src/lib/__generated/sdk';
 import { client, previewClient } from '@src/lib/client';
 import { revalidateDuration } from '@src/pages/utils/constants';
 
@@ -16,50 +20,53 @@ const Page = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { t } = useTranslation();
 
   const page = useContentfulLiveUpdates(props.page);
-  const posts = useContentfulLiveUpdates(props.posts);
+  const heroes = useContentfulLiveUpdates(props.heroes);
 
-  if (!page?.featuredBlogPost || !posts) return;
+  if (!page?.featuredHero || !heroes) {
+    return;
+  }
 
   return (
     <>
+      <div className="fixed top-0 -z-10 h-full w-full bg-[url('https://cdn.wallpapersafari.com/37/55/i53keV.png')] bg-contain bg-center" />
+      <div className="fixed top-0 -z-10 h-full w-full bg-black opacity-60" />
       {page.seoFields && <SeoFields {...page.seoFields} />}
-      <Container>
-        <Link href={`/${page.featuredBlogPost.slug}`}>
-          <ArticleHero article={page.featuredBlogPost} />
+      <Container className="py-8">
+        <Link href={`/${page.featuredHero.slug}`}>
+          <HeroView hero={page.featuredHero} />
         </Link>
       </Container>
 
-      {/* Tutorial: contentful-and-the-starter-template.md */}
-      {/* Uncomment the line below to make the Greeting field available to render */}
-      {/*<Container>*/}
-      {/*  <div className="my-5 bg-colorTextLightest p-5 text-colorBlueLightest">{page.greeting}</div>*/}
-      {/*</Container>*/}
-
-      <Container className="my-8  md:mb-10 lg:mb-16">
-        <h2 className="mb-4 md:mb-6">{t('landingPage.latestArticles')}</h2>
-        <ArticleTileGrid className="md:grid-cols-2 lg:grid-cols-3" articles={posts} />
-      </Container>
+      <div className="bg-cover py-8">
+        <Container className="my-8 md:mb-10 lg:mb-16">
+          <h2 className="mb-4 md:mb-6">{t('landingPage.latestArticles')}</h2>
+          <HeroTileGrid className="md:grid-cols-3 lg:grid-cols-5" heroes={heroes} />
+        </Container>
+      </div>
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale, draftMode: preview }) => {
+export const getStaticProps: GetStaticProps<{
+  page: ({ __typename?: 'PageLanding' | undefined } & PageLandingFieldsFragment) | null | undefined;
+  heroes: Array<({ __typename?: 'PageHero' } & PageHeroFieldsFragment) | null> | undefined;
+}> = async ({ locale, draftMode: preview }) => {
   try {
     const gqlClient = preview ? previewClient : client;
 
     const landingPageData = await gqlClient.pageLanding({ locale, preview });
     const page = landingPageData.pageLandingCollection?.items[0];
 
-    const blogPostsData = await gqlClient.pageBlogPostCollection({
+    const heroesData = await gqlClient.pageHeroCollection({
       limit: 6,
       locale,
-      order: PageBlogPostOrder.PublishedDateDesc,
-      where: {
-        slug_not: page?.featuredBlogPost?.slug,
-      },
+      order: PageHeroOrder.PublishedDateDesc,
+      /*      where: {
+        slug_not: page?.featuredHero?.slug,
+      },*/
       preview,
     });
-    const posts = blogPostsData.pageBlogPostCollection?.items;
+    const heroes = heroesData.pageHeroCollection?.items;
 
     if (!page) {
       return {
@@ -74,7 +81,7 @@ export const getStaticProps: GetStaticProps = async ({ locale, draftMode: previe
         previewActive: !!preview,
         ...(await getServerSideTranslations(locale)),
         page,
-        posts,
+        heroes,
       },
     };
   } catch {
