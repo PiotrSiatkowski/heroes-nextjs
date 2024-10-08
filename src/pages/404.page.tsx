@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Container } from '@src/components/shared/container';
 import { getServerSideTranslations } from '@src/pages/utils/get-serverside-translations';
 
-const ErrorPage404 = () => {
+const ErrorPage404 = props => {
   const { t } = useTranslation();
 
   return (
@@ -13,9 +13,10 @@ const ErrorPage404 = () => {
       <h1 className="h2">{t('notFound.title')}</h1>
       <p className="mt-4">
         <Trans i18nKey="notFound.description">
-          <Link className="text-blue500" href="/" />
+          <Link className="text-blue-500" href="/" />
         </Trans>
       </p>
+      <p>{props.error}</p>
     </Container>
   );
 };

@@ -1,7 +1,7 @@
 import { HTMLProps } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-import { HeroTile } from '@src/components/features/article/HeroTile';
+import { HeroTile } from '@src/components/features/hero/HeroTile';
 import { PageHeroFieldsFragment } from '@src/lib/__generated/sdk';
 
 interface Props extends HTMLProps<HTMLDivElement> {

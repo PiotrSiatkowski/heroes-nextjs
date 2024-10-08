@@ -5,7 +5,11 @@ import { PageHeroFieldsFragment } from '@src/lib/__generated/sdk';
 
 interface Props {
   entryId: NonNullable<PageHeroFieldsFragment>['sys']['id'];
-  description: NonNullable<PageHeroFieldsFragment>['skill1Description'];
+  description: NonNullable<PageHeroFieldsFragment>[
+    | 'skill1Description'
+    | 'skill2Description'
+    | 'skill3Description'
+    | 'skill4Description'];
 }
 export const HeroSkillDescription = ({ description, entryId }: Props) => {
   const inspectorProps = useContentfulInspectorMode({ entryId });

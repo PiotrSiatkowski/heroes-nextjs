@@ -5,12 +5,10 @@ fragment ReferencePageHeroFields on PageHero {
     spaceId
   }
   slug
-  author {
-    ...AuthorFields
-  }
-  publishedDate
   name
-  description
+  avatar {
+    ...ImageFields
+  }
   featuredImage {
     ...ImageFields
   }
@@ -31,8 +29,22 @@ fragment PageHeroFields on PageHero {
     ...AuthorFields
   }
   publishedDate
+  isLegion
+  armor
+  attackMin
+  attackMax
+  range
+  speed
+  attribute
   name
+  str
+  strGain
+  agi
+  agiGain
+  int
+  intGain
   description
+  shortDescription
   featuredImage {
     ...ImageFields
   }

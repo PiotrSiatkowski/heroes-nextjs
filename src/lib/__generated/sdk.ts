@@ -335,6 +335,12 @@ export enum ComponentAuthorLinkingCollectionsPageHeroCollectionOrder {
   AgiGainDesc = 'agiGain_DESC',
   AgiAsc = 'agi_ASC',
   AgiDesc = 'agi_DESC',
+  ArmorAsc = 'armor_ASC',
+  ArmorDesc = 'armor_DESC',
+  AttackMaxAsc = 'attackMax_ASC',
+  AttackMaxDesc = 'attackMax_DESC',
+  AttackMinAsc = 'attackMin_ASC',
+  AttackMinDesc = 'attackMin_DESC',
   AttributeAsc = 'attribute_ASC',
   AttributeDesc = 'attribute_DESC',
   IntGainAsc = 'intGain_ASC',
@@ -343,6 +349,8 @@ export enum ComponentAuthorLinkingCollectionsPageHeroCollectionOrder {
   IntDesc = 'int_DESC',
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
+  IsLegionAsc = 'isLegion_ASC',
+  IsLegionDesc = 'isLegion_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
   PublishedDateAsc = 'publishedDate_ASC',
@@ -644,6 +652,12 @@ export enum ComponentSeoLinkingCollectionsPageHeroCollectionOrder {
   AgiGainDesc = 'agiGain_DESC',
   AgiAsc = 'agi_ASC',
   AgiDesc = 'agi_DESC',
+  ArmorAsc = 'armor_ASC',
+  ArmorDesc = 'armor_DESC',
+  AttackMaxAsc = 'attackMax_ASC',
+  AttackMaxDesc = 'attackMax_DESC',
+  AttackMinAsc = 'attackMin_ASC',
+  AttackMinDesc = 'attackMin_DESC',
   AttributeAsc = 'attribute_ASC',
   AttributeDesc = 'attribute_DESC',
   IntGainAsc = 'intGain_ASC',
@@ -652,6 +666,8 @@ export enum ComponentSeoLinkingCollectionsPageHeroCollectionOrder {
   IntDesc = 'int_DESC',
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
+  IsLegionAsc = 'isLegion_ASC',
+  IsLegionDesc = 'isLegion_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
   PublishedDateAsc = 'publishedDate_ASC',
@@ -868,6 +884,9 @@ export type PageHero = Entry & _Node & {
   _id: Scalars['ID'];
   agi?: Maybe<Scalars['Int']>;
   agiGain?: Maybe<Scalars['Float']>;
+  armor?: Maybe<Scalars['Float']>;
+  attackMax?: Maybe<Scalars['Int']>;
+  attackMin?: Maybe<Scalars['Int']>;
   attribute?: Maybe<Scalars['String']>;
   author?: Maybe<ComponentAuthor>;
   avatar?: Maybe<Asset>;
@@ -877,11 +896,13 @@ export type PageHero = Entry & _Node & {
   int?: Maybe<Scalars['Int']>;
   intGain?: Maybe<Scalars['Float']>;
   internalName?: Maybe<Scalars['String']>;
+  isLegion?: Maybe<Scalars['Boolean']>;
   linkedFrom?: Maybe<PageHeroLinkingCollections>;
   name?: Maybe<Scalars['String']>;
   publishedDate?: Maybe<Scalars['DateTime']>;
   range?: Maybe<Scalars['Int']>;
   seoFields?: Maybe<ComponentSeo>;
+  shortDescription?: Maybe<Scalars['String']>;
   skill1Description?: Maybe<PageHeroSkill1Description>;
   skill1Image?: Maybe<Asset>;
   skill2Description?: Maybe<PageHeroSkill2Description>;
@@ -906,6 +927,24 @@ export type PageHeroAgiArgs = {
 
 /** Individual hero description data. [See type definition](https://app.contentful.com/spaces/9md11hz3a4q5/content_types/pageHero) */
 export type PageHeroAgiGainArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Individual hero description data. [See type definition](https://app.contentful.com/spaces/9md11hz3a4q5/content_types/pageHero) */
+export type PageHeroArmorArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Individual hero description data. [See type definition](https://app.contentful.com/spaces/9md11hz3a4q5/content_types/pageHero) */
+export type PageHeroAttackMaxArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Individual hero description data. [See type definition](https://app.contentful.com/spaces/9md11hz3a4q5/content_types/pageHero) */
+export type PageHeroAttackMinArgs = {
   locale?: InputMaybe<Scalars['String']>;
 };
 
@@ -963,6 +1002,12 @@ export type PageHeroInternalNameArgs = {
 
 
 /** Individual hero description data. [See type definition](https://app.contentful.com/spaces/9md11hz3a4q5/content_types/pageHero) */
+export type PageHeroIsLegionArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+/** Individual hero description data. [See type definition](https://app.contentful.com/spaces/9md11hz3a4q5/content_types/pageHero) */
 export type PageHeroLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
@@ -991,6 +1036,12 @@ export type PageHeroSeoFieldsArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
   where?: InputMaybe<ComponentSeoFilter>;
+};
+
+
+/** Individual hero description data. [See type definition](https://app.contentful.com/spaces/9md11hz3a4q5/content_types/pageHero) */
+export type PageHeroShortDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1098,6 +1149,33 @@ export type PageHeroFilter = {
   agi_lte?: InputMaybe<Scalars['Int']>;
   agi_not?: InputMaybe<Scalars['Int']>;
   agi_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  armor?: InputMaybe<Scalars['Float']>;
+  armor_exists?: InputMaybe<Scalars['Boolean']>;
+  armor_gt?: InputMaybe<Scalars['Float']>;
+  armor_gte?: InputMaybe<Scalars['Float']>;
+  armor_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  armor_lt?: InputMaybe<Scalars['Float']>;
+  armor_lte?: InputMaybe<Scalars['Float']>;
+  armor_not?: InputMaybe<Scalars['Float']>;
+  armor_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  attackMax?: InputMaybe<Scalars['Int']>;
+  attackMax_exists?: InputMaybe<Scalars['Boolean']>;
+  attackMax_gt?: InputMaybe<Scalars['Int']>;
+  attackMax_gte?: InputMaybe<Scalars['Int']>;
+  attackMax_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  attackMax_lt?: InputMaybe<Scalars['Int']>;
+  attackMax_lte?: InputMaybe<Scalars['Int']>;
+  attackMax_not?: InputMaybe<Scalars['Int']>;
+  attackMax_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  attackMin?: InputMaybe<Scalars['Int']>;
+  attackMin_exists?: InputMaybe<Scalars['Boolean']>;
+  attackMin_gt?: InputMaybe<Scalars['Int']>;
+  attackMin_gte?: InputMaybe<Scalars['Int']>;
+  attackMin_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  attackMin_lt?: InputMaybe<Scalars['Int']>;
+  attackMin_lte?: InputMaybe<Scalars['Int']>;
+  attackMin_not?: InputMaybe<Scalars['Int']>;
+  attackMin_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   attribute?: InputMaybe<Scalars['String']>;
   attribute_contains?: InputMaybe<Scalars['String']>;
   attribute_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1142,6 +1220,9 @@ export type PageHeroFilter = {
   internalName_not?: InputMaybe<Scalars['String']>;
   internalName_not_contains?: InputMaybe<Scalars['String']>;
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  isLegion?: InputMaybe<Scalars['Boolean']>;
+  isLegion_exists?: InputMaybe<Scalars['Boolean']>;
+  isLegion_not?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
   name_contains?: InputMaybe<Scalars['String']>;
   name_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1169,6 +1250,13 @@ export type PageHeroFilter = {
   range_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   seoFields?: InputMaybe<CfComponentSeoNestedFilter>;
   seoFields_exists?: InputMaybe<Scalars['Boolean']>;
+  shortDescription?: InputMaybe<Scalars['String']>;
+  shortDescription_contains?: InputMaybe<Scalars['String']>;
+  shortDescription_exists?: InputMaybe<Scalars['Boolean']>;
+  shortDescription_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  shortDescription_not?: InputMaybe<Scalars['String']>;
+  shortDescription_not_contains?: InputMaybe<Scalars['String']>;
+  shortDescription_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   skill1Description_contains?: InputMaybe<Scalars['String']>;
   skill1Description_exists?: InputMaybe<Scalars['Boolean']>;
   skill1Description_not_contains?: InputMaybe<Scalars['String']>;
@@ -1263,6 +1351,12 @@ export enum PageHeroOrder {
   AgiGainDesc = 'agiGain_DESC',
   AgiAsc = 'agi_ASC',
   AgiDesc = 'agi_DESC',
+  ArmorAsc = 'armor_ASC',
+  ArmorDesc = 'armor_DESC',
+  AttackMaxAsc = 'attackMax_ASC',
+  AttackMaxDesc = 'attackMax_DESC',
+  AttackMinAsc = 'attackMin_ASC',
+  AttackMinDesc = 'attackMin_DESC',
   AttributeAsc = 'attribute_ASC',
   AttributeDesc = 'attribute_DESC',
   IntGainAsc = 'intGain_ASC',
@@ -1271,6 +1365,8 @@ export enum PageHeroOrder {
   IntDesc = 'int_DESC',
   InternalNameAsc = 'internalName_ASC',
   InternalNameDesc = 'internalName_DESC',
+  IsLegionAsc = 'isLegion_ASC',
+  IsLegionDesc = 'isLegion_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
   PublishedDateAsc = 'publishedDate_ASC',
@@ -1864,6 +1960,33 @@ export type CfPageHeroNestedFilter = {
   agi_lte?: InputMaybe<Scalars['Int']>;
   agi_not?: InputMaybe<Scalars['Int']>;
   agi_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  armor?: InputMaybe<Scalars['Float']>;
+  armor_exists?: InputMaybe<Scalars['Boolean']>;
+  armor_gt?: InputMaybe<Scalars['Float']>;
+  armor_gte?: InputMaybe<Scalars['Float']>;
+  armor_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  armor_lt?: InputMaybe<Scalars['Float']>;
+  armor_lte?: InputMaybe<Scalars['Float']>;
+  armor_not?: InputMaybe<Scalars['Float']>;
+  armor_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  attackMax?: InputMaybe<Scalars['Int']>;
+  attackMax_exists?: InputMaybe<Scalars['Boolean']>;
+  attackMax_gt?: InputMaybe<Scalars['Int']>;
+  attackMax_gte?: InputMaybe<Scalars['Int']>;
+  attackMax_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  attackMax_lt?: InputMaybe<Scalars['Int']>;
+  attackMax_lte?: InputMaybe<Scalars['Int']>;
+  attackMax_not?: InputMaybe<Scalars['Int']>;
+  attackMax_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  attackMin?: InputMaybe<Scalars['Int']>;
+  attackMin_exists?: InputMaybe<Scalars['Boolean']>;
+  attackMin_gt?: InputMaybe<Scalars['Int']>;
+  attackMin_gte?: InputMaybe<Scalars['Int']>;
+  attackMin_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  attackMin_lt?: InputMaybe<Scalars['Int']>;
+  attackMin_lte?: InputMaybe<Scalars['Int']>;
+  attackMin_not?: InputMaybe<Scalars['Int']>;
+  attackMin_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   attribute?: InputMaybe<Scalars['String']>;
   attribute_contains?: InputMaybe<Scalars['String']>;
   attribute_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1907,6 +2030,9 @@ export type CfPageHeroNestedFilter = {
   internalName_not?: InputMaybe<Scalars['String']>;
   internalName_not_contains?: InputMaybe<Scalars['String']>;
   internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  isLegion?: InputMaybe<Scalars['Boolean']>;
+  isLegion_exists?: InputMaybe<Scalars['Boolean']>;
+  isLegion_not?: InputMaybe<Scalars['Boolean']>;
   name?: InputMaybe<Scalars['String']>;
   name_contains?: InputMaybe<Scalars['String']>;
   name_exists?: InputMaybe<Scalars['Boolean']>;
@@ -1933,6 +2059,13 @@ export type CfPageHeroNestedFilter = {
   range_not?: InputMaybe<Scalars['Int']>;
   range_not_in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   seoFields_exists?: InputMaybe<Scalars['Boolean']>;
+  shortDescription?: InputMaybe<Scalars['String']>;
+  shortDescription_contains?: InputMaybe<Scalars['String']>;
+  shortDescription_exists?: InputMaybe<Scalars['Boolean']>;
+  shortDescription_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  shortDescription_not?: InputMaybe<Scalars['String']>;
+  shortDescription_not_contains?: InputMaybe<Scalars['String']>;
+  shortDescription_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   skill1Description_contains?: InputMaybe<Scalars['String']>;
   skill1Description_exists?: InputMaybe<Scalars['Boolean']>;
   skill1Description_not_contains?: InputMaybe<Scalars['String']>;
@@ -1993,15 +2126,15 @@ export type AuthorFieldsFragment = { __typename: 'ComponentAuthor', name?: strin
 
 export type ImageFieldsFragment = { __typename: 'Asset', title?: string | null, description?: string | null, width?: number | null, height?: number | null, url?: string | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } };
 
-export type ReferencePageHeroFieldsFragment = { __typename: 'PageHero', slug?: string | null, publishedDate?: any | null, name?: string | null, description?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, author?: (
-    { __typename?: 'ComponentAuthor' }
-    & AuthorFieldsFragment
+export type ReferencePageHeroFieldsFragment = { __typename: 'PageHero', slug?: string | null, name?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, avatar?: (
+    { __typename?: 'Asset' }
+    & ImageFieldsFragment
   ) | null, featuredImage?: (
     { __typename?: 'Asset' }
     & ImageFieldsFragment
   ) | null };
 
-export type PageHeroFieldsFragment = { __typename: 'PageHero', internalName?: string | null, slug?: string | null, publishedDate?: any | null, name?: string | null, description?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, seoFields?: (
+export type PageHeroFieldsFragment = { __typename: 'PageHero', internalName?: string | null, slug?: string | null, publishedDate?: any | null, isLegion?: boolean | null, armor?: number | null, attackMin?: number | null, attackMax?: number | null, range?: number | null, speed?: number | null, attribute?: string | null, name?: string | null, str?: number | null, strGain?: number | null, agi?: number | null, agiGain?: number | null, int?: number | null, intGain?: number | null, description?: string | null, shortDescription?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, seoFields?: (
     { __typename?: 'ComponentSeo' }
     & SeoFieldsFragment
   ) | null, author?: (
@@ -2062,7 +2195,7 @@ export type PageHeroCollectionQueryVariables = Exact<{
 
 export type PageHeroCollectionQuery = { __typename?: 'Query', pageHeroCollection?: { __typename?: 'PageHeroCollection', items: Array<(
       { __typename?: 'PageHero' }
-      & PageHeroFieldsFragment
+      & ReferencePageHeroFieldsFragment
     ) | null> } | null };
 
 export type PageLandingFieldsFragment = { __typename: 'PageLanding', internalName?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, seoFields?: (
@@ -2070,7 +2203,7 @@ export type PageLandingFieldsFragment = { __typename: 'PageLanding', internalNam
     & SeoFieldsFragment
   ) | null, featuredHero?: (
     { __typename?: 'PageHero' }
-    & ReferencePageHeroFieldsFragment
+    & PageHeroFieldsFragment
   ) | null };
 
 export type PageLandingQueryVariables = Exact<{
@@ -2131,6 +2264,23 @@ export const ImageFieldsFragmentDoc = gql`
   contentType
 }
     `;
+export const ReferencePageHeroFieldsFragmentDoc = gql`
+    fragment ReferencePageHeroFields on PageHero {
+  __typename
+  sys {
+    id
+    spaceId
+  }
+  slug
+  name
+  avatar {
+    ...ImageFields
+  }
+  featuredImage {
+    ...ImageFields
+  }
+}
+    `;
 export const SeoFieldsFragmentDoc = gql`
     fragment SeoFields on ComponentSeo {
   __typename
@@ -2188,8 +2338,22 @@ export const PageHeroFieldsFragmentDoc = gql`
     ...AuthorFields
   }
   publishedDate
+  isLegion
+  armor
+  attackMin
+  attackMax
+  range
+  speed
+  attribute
   name
+  str
+  strGain
+  agi
+  agiGain
+  int
+  intGain
   description
+  shortDescription
   featuredImage {
     ...ImageFields
   }
@@ -2250,25 +2414,6 @@ export const PageHeroFieldsFragmentDoc = gql`
   }
 }
     `;
-export const ReferencePageHeroFieldsFragmentDoc = gql`
-    fragment ReferencePageHeroFields on PageHero {
-  __typename
-  sys {
-    id
-    spaceId
-  }
-  slug
-  author {
-    ...AuthorFields
-  }
-  publishedDate
-  name
-  description
-  featuredImage {
-    ...ImageFields
-  }
-}
-    `;
 export const PageLandingFieldsFragmentDoc = gql`
     fragment PageLandingFields on PageLanding {
   __typename
@@ -2281,7 +2426,7 @@ export const PageLandingFieldsFragmentDoc = gql`
     ...SeoFields
   }
   featuredHero {
-    ...ReferencePageHeroFields
+    ...PageHeroFields
   }
 }
     `;
@@ -2332,15 +2477,12 @@ export const PageHeroCollectionDocument = gql`
     where: $where
   ) {
     items {
-      ...PageHeroFields
+      ...ReferencePageHeroFields
     }
   }
 }
-    ${PageHeroFieldsFragmentDoc}
-${SeoFieldsFragmentDoc}
-${ImageFieldsFragmentDoc}
-${AuthorFieldsFragmentDoc}
-${RichImageFieldsFragmentDoc}`;
+    ${ReferencePageHeroFieldsFragmentDoc}
+${ImageFieldsFragmentDoc}`;
 export const PageLandingDocument = gql`
     query pageLanding($locale: String, $preview: Boolean) {
   pageLandingCollection(limit: 1, locale: $locale, preview: $preview) {
@@ -2352,8 +2494,9 @@ export const PageLandingDocument = gql`
     ${PageLandingFieldsFragmentDoc}
 ${SeoFieldsFragmentDoc}
 ${ImageFieldsFragmentDoc}
-${ReferencePageHeroFieldsFragmentDoc}
-${AuthorFieldsFragmentDoc}`;
+${PageHeroFieldsFragmentDoc}
+${AuthorFieldsFragmentDoc}
+${RichImageFieldsFragmentDoc}`;
 export const PageLandingCollectionDocument = gql`
     query pageLandingCollection($locale: String, $preview: Boolean) {
   pageLandingCollection(limit: 100, locale: $locale, preview: $preview) {
@@ -2365,8 +2508,9 @@ export const PageLandingCollectionDocument = gql`
     ${PageLandingFieldsFragmentDoc}
 ${SeoFieldsFragmentDoc}
 ${ImageFieldsFragmentDoc}
-${ReferencePageHeroFieldsFragmentDoc}
-${AuthorFieldsFragmentDoc}`;
+${PageHeroFieldsFragmentDoc}
+${AuthorFieldsFragmentDoc}
+${RichImageFieldsFragmentDoc}`;
 export const SitemapPagesDocument = gql`
     query sitemapPages($locale: String!) {
   ...sitemapPagesFields

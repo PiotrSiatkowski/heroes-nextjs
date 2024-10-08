@@ -7,7 +7,7 @@ query pageHeroCollection(
 ) {
   pageHeroCollection(limit: $limit, locale: $locale, preview: $preview, order: $order where: $where) {
     items {
-      ...PageHeroFields
+      ...ReferencePageHeroFields
     }
   }
 }

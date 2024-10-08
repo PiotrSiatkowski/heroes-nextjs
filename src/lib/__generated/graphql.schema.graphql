@@ -174,6 +174,12 @@ enum ComponentAuthorLinkingCollectionsPageHeroCollectionOrder {
   agiGain_DESC
   agi_ASC
   agi_DESC
+  armor_ASC
+  armor_DESC
+  attackMax_ASC
+  attackMax_DESC
+  attackMin_ASC
+  attackMin_DESC
   attribute_ASC
   attribute_DESC
   intGain_ASC
@@ -182,6 +188,8 @@ enum ComponentAuthorLinkingCollectionsPageHeroCollectionOrder {
   int_DESC
   internalName_ASC
   internalName_DESC
+  isLegion_ASC
+  isLegion_DESC
   name_ASC
   name_DESC
   publishedDate_ASC
@@ -365,6 +373,12 @@ enum ComponentSeoLinkingCollectionsPageHeroCollectionOrder {
   agiGain_DESC
   agi_ASC
   agi_DESC
+  armor_ASC
+  armor_DESC
+  attackMax_ASC
+  attackMax_DESC
+  attackMin_ASC
+  attackMin_DESC
   attribute_ASC
   attribute_DESC
   intGain_ASC
@@ -373,6 +387,8 @@ enum ComponentSeoLinkingCollectionsPageHeroCollectionOrder {
   int_DESC
   internalName_ASC
   internalName_DESC
+  isLegion_ASC
+  isLegion_DESC
   name_ASC
   name_DESC
   publishedDate_ASC
@@ -641,6 +657,9 @@ type PageHero implements Entry & _Node {
   _id: ID!
   agi(locale: String): Int
   agiGain(locale: String): Float
+  armor(locale: String): Float
+  attackMax(locale: String): Int
+  attackMin(locale: String): Int
   attribute(locale: String): String
   author(locale: String, preview: Boolean, where: ComponentAuthorFilter): ComponentAuthor
   avatar(locale: String, preview: Boolean): Asset
@@ -650,11 +669,13 @@ type PageHero implements Entry & _Node {
   int(locale: String): Int
   intGain(locale: String): Float
   internalName(locale: String): String
+  isLegion(locale: String): Boolean
   linkedFrom(allowedLocales: [String]): PageHeroLinkingCollections
   name(locale: String): String
   publishedDate(locale: String): DateTime
   range(locale: String): Int
   seoFields(locale: String, preview: Boolean, where: ComponentSeoFilter): ComponentSeo
+  shortDescription(locale: String): String
   skill1Description(locale: String): PageHeroSkill1Description
   skill1Image(locale: String, preview: Boolean): Asset
   skill2Description(locale: String): PageHeroSkill2Description
@@ -698,6 +719,33 @@ input PageHeroFilter {
   agi_lte: Int
   agi_not: Int
   agi_not_in: [Int]
+  armor: Float
+  armor_exists: Boolean
+  armor_gt: Float
+  armor_gte: Float
+  armor_in: [Float]
+  armor_lt: Float
+  armor_lte: Float
+  armor_not: Float
+  armor_not_in: [Float]
+  attackMax: Int
+  attackMax_exists: Boolean
+  attackMax_gt: Int
+  attackMax_gte: Int
+  attackMax_in: [Int]
+  attackMax_lt: Int
+  attackMax_lte: Int
+  attackMax_not: Int
+  attackMax_not_in: [Int]
+  attackMin: Int
+  attackMin_exists: Boolean
+  attackMin_gt: Int
+  attackMin_gte: Int
+  attackMin_in: [Int]
+  attackMin_lt: Int
+  attackMin_lte: Int
+  attackMin_not: Int
+  attackMin_not_in: [Int]
   attribute: String
   attribute_contains: String
   attribute_exists: Boolean
@@ -742,6 +790,9 @@ input PageHeroFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  isLegion: Boolean
+  isLegion_exists: Boolean
+  isLegion_not: Boolean
   name: String
   name_contains: String
   name_exists: Boolean
@@ -769,6 +820,13 @@ input PageHeroFilter {
   range_not_in: [Int]
   seoFields: cfComponentSeoNestedFilter
   seoFields_exists: Boolean
+  shortDescription: String
+  shortDescription_contains: String
+  shortDescription_exists: Boolean
+  shortDescription_in: [String]
+  shortDescription_not: String
+  shortDescription_not_contains: String
+  shortDescription_not_in: [String]
   skill1Description_contains: String
   skill1Description_exists: Boolean
   skill1Description_not_contains: String
@@ -845,6 +903,12 @@ enum PageHeroOrder {
   agiGain_DESC
   agi_ASC
   agi_DESC
+  armor_ASC
+  armor_DESC
+  attackMax_ASC
+  attackMax_DESC
+  attackMin_ASC
+  attackMin_DESC
   attribute_ASC
   attribute_DESC
   intGain_ASC
@@ -853,6 +917,8 @@ enum PageHeroOrder {
   int_DESC
   internalName_ASC
   internalName_DESC
+  isLegion_ASC
+  isLegion_DESC
   name_ASC
   name_DESC
   publishedDate_ASC
@@ -1261,6 +1327,33 @@ input cfPageHeroNestedFilter {
   agi_lte: Int
   agi_not: Int
   agi_not_in: [Int]
+  armor: Float
+  armor_exists: Boolean
+  armor_gt: Float
+  armor_gte: Float
+  armor_in: [Float]
+  armor_lt: Float
+  armor_lte: Float
+  armor_not: Float
+  armor_not_in: [Float]
+  attackMax: Int
+  attackMax_exists: Boolean
+  attackMax_gt: Int
+  attackMax_gte: Int
+  attackMax_in: [Int]
+  attackMax_lt: Int
+  attackMax_lte: Int
+  attackMax_not: Int
+  attackMax_not_in: [Int]
+  attackMin: Int
+  attackMin_exists: Boolean
+  attackMin_gt: Int
+  attackMin_gte: Int
+  attackMin_in: [Int]
+  attackMin_lt: Int
+  attackMin_lte: Int
+  attackMin_not: Int
+  attackMin_not_in: [Int]
   attribute: String
   attribute_contains: String
   attribute_exists: Boolean
@@ -1304,6 +1397,9 @@ input cfPageHeroNestedFilter {
   internalName_not: String
   internalName_not_contains: String
   internalName_not_in: [String]
+  isLegion: Boolean
+  isLegion_exists: Boolean
+  isLegion_not: Boolean
   name: String
   name_contains: String
   name_exists: Boolean
@@ -1330,6 +1426,13 @@ input cfPageHeroNestedFilter {
   range_not: Int
   range_not_in: [Int]
   seoFields_exists: Boolean
+  shortDescription: String
+  shortDescription_contains: String
+  shortDescription_exists: Boolean
+  shortDescription_in: [String]
+  shortDescription_not: String
+  shortDescription_not_contains: String
+  shortDescription_not_in: [String]
   skill1Description_contains: String
   skill1Description_exists: Boolean
   skill1Description_not_contains: String

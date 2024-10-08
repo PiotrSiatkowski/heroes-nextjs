@@ -9,7 +9,7 @@ fragment PageLandingFields on PageLanding {
     ...SeoFields
   }
   featuredHero {
-    ...ReferencePageHeroFields
+    ...PageHeroFields
   }
   # Tutorial: contentful-and-the-starter-template.md
   # Uncomment the line below to add the Greeting field to the query

@@ -57,11 +57,13 @@ module.exports = withPlugins(plugins, {
    * Settings are the defaults
    */
   images: {
-    domains: ['images.ctfassets.net','images.eu.ctfassets.net'],
+    domains: ['images.ctfassets.net', 'images.eu.ctfassets.net', 'static.wikia.nocookie.net'],
   },
 
   pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
-
+  compiler: {
+    removeConsole: false,
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

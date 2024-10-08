@@ -22,6 +22,14 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-urbanist)', ...fontFamily.sans],
       },
+      typography: ({ theme }) => ({
+        slate: {
+          css: {
+            '--tw-prose-bullets': theme('colors.slate[400]'),
+            '--tw-prose-invert-bullets': theme('colors.slate[100]'),
+          }
+        }
+      })
     },
   },
   plugins: [require('@tailwindcss/typography')],
