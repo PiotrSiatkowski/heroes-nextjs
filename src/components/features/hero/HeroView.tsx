@@ -111,18 +111,16 @@ export const HeroView = ({ hero }: Props) => {
         <div className="z-10 flex w-full flex-col p-4 lg:p-8">
           <div className="flex justify-between">
             <div className="flex h-full w-full flex-col justify-between lg:w-4/5">
-              <div className="flex flex-row pr-2 pb-1.5 lg:h-20">
+              <div className="flex flex-row pb-1.5 lg:h-20 lg:pr-2">
                 <div className="h-full lg:overflow-hidden">
-                  <div className="pr-2 text-4xl font-bold leading-10 lg:float-left">
+                  <div className="pb-1 text-4xl font-bold leading-10 lg:float-left lg:pr-2">
                     {hero.name}
                   </div>
                   <div className="mt-2 h-full text-justify text-xs leading-[15px] lg:mt-0">
+                    {renderAvatar('block float-right ml-2 lg:hidden min-w-[128px] min-h-[128px]')}
                     {hero.shortDescription}
                   </div>
                 </div>
-                {renderAvatar(
-                  'block lg:hidden basis-1/4 shrink-0 ml-2 min-w-[128px] min-h-[128px]',
-                )}
               </div>
               <div className="flex flex-wrap lg:flex-nowrap">
                 <div className="flex h-12 basis-1/2 items-center border-2 border-[#2c2e2e] bg-red-900 px-1 py-3 lg:basis-1/4">
