@@ -26,14 +26,14 @@ const Page = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
       <div className="fixed top-0 -z-10 h-full w-full bg-[url('https://cdn.wallpapersafari.com/37/55/i53keV.png')] bg-contain bg-center" />
       <div className="fixed top-0 -z-10 h-full w-full bg-black opacity-60" />
       {hero.seoFields && <SeoFields {...hero.seoFields} />}
-      <Container className="py-4 lg:py-8">
+      <Container className="flex w-full flex-row justify-center py-4 lg:py-8">
         <HeroView hero={hero} />
       </Container>
 
       <div className="bg-cover">
         <Container className="py-4 md:mb-10 lg:mb-16 lg:py-8">
           <h2 className="mb-4 md:mb-6">{t('landingPage.latestArticles')}</h2>
-          <HeroTileGrid className="md:grid-cols-3 lg:grid-cols-5" heroes={heroes} />
+          <HeroTileGrid className="md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" heroes={heroes} />
         </Container>
       </div>
     </>

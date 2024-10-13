@@ -343,6 +343,8 @@ export enum ComponentAuthorLinkingCollectionsPageHeroCollectionOrder {
   AttackMinDesc = 'attackMin_DESC',
   AttributeAsc = 'attribute_ASC',
   AttributeDesc = 'attribute_DESC',
+  FeaturedImageFitAsc = 'featuredImageFit_ASC',
+  FeaturedImageFitDesc = 'featuredImageFit_DESC',
   IntGainAsc = 'intGain_ASC',
   IntGainDesc = 'intGain_DESC',
   IntAsc = 'int_ASC',
@@ -660,6 +662,8 @@ export enum ComponentSeoLinkingCollectionsPageHeroCollectionOrder {
   AttackMinDesc = 'attackMin_DESC',
   AttributeAsc = 'attribute_ASC',
   AttributeDesc = 'attribute_DESC',
+  FeaturedImageFitAsc = 'featuredImageFit_ASC',
+  FeaturedImageFitDesc = 'featuredImageFit_DESC',
   IntGainAsc = 'intGain_ASC',
   IntGainDesc = 'intGain_DESC',
   IntAsc = 'int_ASC',
@@ -893,6 +897,7 @@ export type PageHero = Entry & _Node & {
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']>;
   featuredImage?: Maybe<Asset>;
+  featuredImageFit?: Maybe<Scalars['String']>;
   int?: Maybe<Scalars['Int']>;
   intGain?: Maybe<Scalars['Float']>;
   internalName?: Maybe<Scalars['String']>;
@@ -980,6 +985,12 @@ export type PageHeroDescriptionArgs = {
 export type PageHeroFeaturedImageArgs = {
   locale?: InputMaybe<Scalars['String']>;
   preview?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+/** Individual hero description data. [See type definition](https://app.contentful.com/spaces/9md11hz3a4q5/content_types/pageHero) */
+export type PageHeroFeaturedImageFitArgs = {
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1194,6 +1205,13 @@ export type PageHeroFilter = {
   description_not?: InputMaybe<Scalars['String']>;
   description_not_contains?: InputMaybe<Scalars['String']>;
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  featuredImageFit?: InputMaybe<Scalars['String']>;
+  featuredImageFit_contains?: InputMaybe<Scalars['String']>;
+  featuredImageFit_exists?: InputMaybe<Scalars['Boolean']>;
+  featuredImageFit_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  featuredImageFit_not?: InputMaybe<Scalars['String']>;
+  featuredImageFit_not_contains?: InputMaybe<Scalars['String']>;
+  featuredImageFit_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   featuredImage_exists?: InputMaybe<Scalars['Boolean']>;
   int?: InputMaybe<Scalars['Int']>;
   intGain?: InputMaybe<Scalars['Float']>;
@@ -1359,6 +1377,8 @@ export enum PageHeroOrder {
   AttackMinDesc = 'attackMin_DESC',
   AttributeAsc = 'attribute_ASC',
   AttributeDesc = 'attribute_DESC',
+  FeaturedImageFitAsc = 'featuredImageFit_ASC',
+  FeaturedImageFitDesc = 'featuredImageFit_DESC',
   IntGainAsc = 'intGain_ASC',
   IntGainDesc = 'intGain_DESC',
   IntAsc = 'int_ASC',
@@ -2004,6 +2024,13 @@ export type CfPageHeroNestedFilter = {
   description_not?: InputMaybe<Scalars['String']>;
   description_not_contains?: InputMaybe<Scalars['String']>;
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  featuredImageFit?: InputMaybe<Scalars['String']>;
+  featuredImageFit_contains?: InputMaybe<Scalars['String']>;
+  featuredImageFit_exists?: InputMaybe<Scalars['Boolean']>;
+  featuredImageFit_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  featuredImageFit_not?: InputMaybe<Scalars['String']>;
+  featuredImageFit_not_contains?: InputMaybe<Scalars['String']>;
+  featuredImageFit_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   featuredImage_exists?: InputMaybe<Scalars['Boolean']>;
   int?: InputMaybe<Scalars['Int']>;
   intGain?: InputMaybe<Scalars['Float']>;
@@ -2126,15 +2153,12 @@ export type AuthorFieldsFragment = { __typename: 'ComponentAuthor', name?: strin
 
 export type ImageFieldsFragment = { __typename: 'Asset', title?: string | null, description?: string | null, width?: number | null, height?: number | null, url?: string | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } };
 
-export type ReferencePageHeroFieldsFragment = { __typename: 'PageHero', slug?: string | null, name?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, avatar?: (
+export type ReferencePageHeroFieldsFragment = { __typename: 'PageHero', slug?: string | null, name?: string | null, featuredImageFit?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, avatar?: (
     { __typename?: 'Asset' }
     & ImageFieldsFragment
-  ) | null, featuredImage?: (
-    { __typename?: 'Asset' }
-    & ImageFieldsFragment
-  ) | null };
+  ) | null, featuredImage?: { __typename: 'Asset', title?: string | null, description?: string | null, width?: number | null, height?: number | null, contentType?: string | null, url?: string | null, sys: { __typename?: 'Sys', id: string } } | null };
 
-export type PageHeroFieldsFragment = { __typename: 'PageHero', internalName?: string | null, slug?: string | null, publishedDate?: any | null, isLegion?: boolean | null, armor?: number | null, attackMin?: number | null, attackMax?: number | null, range?: number | null, speed?: number | null, attribute?: string | null, name?: string | null, str?: number | null, strGain?: number | null, agi?: number | null, agiGain?: number | null, int?: number | null, intGain?: number | null, description?: string | null, shortDescription?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, seoFields?: (
+export type PageHeroFieldsFragment = { __typename: 'PageHero', internalName?: string | null, slug?: string | null, publishedDate?: any | null, isLegion?: boolean | null, armor?: number | null, attackMin?: number | null, attackMax?: number | null, range?: number | null, speed?: number | null, attribute?: string | null, name?: string | null, str?: number | null, strGain?: number | null, agi?: number | null, agiGain?: number | null, int?: number | null, intGain?: number | null, description?: string | null, shortDescription?: string | null, featuredImageFit?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, seoFields?: (
     { __typename?: 'ComponentSeo' }
     & SeoFieldsFragment
   ) | null, author?: (
@@ -2276,8 +2300,18 @@ export const ReferencePageHeroFieldsFragmentDoc = gql`
   avatar {
     ...ImageFields
   }
+  featuredImageFit
   featuredImage {
-    ...ImageFields
+    __typename
+    sys {
+      id
+    }
+    title
+    description
+    width
+    height
+    contentType
+    url(transform: {width: 512, height: 512, format: JPG, quality: 70})
   }
 }
     `;
@@ -2354,6 +2388,7 @@ export const PageHeroFieldsFragmentDoc = gql`
   intGain
   description
   shortDescription
+  featuredImageFit
   featuredImage {
     ...ImageFields
   }

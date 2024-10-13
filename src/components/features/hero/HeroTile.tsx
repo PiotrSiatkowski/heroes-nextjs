@@ -21,7 +21,7 @@ export const HeroTile = ({ hero, className }: Props) => {
     <Link className="flex flex-col" href={`/${hero.slug}`}>
       <div
         className={twMerge(
-          'group flex flex-1 flex-col overflow-hidden border-4 border-[#2c2e2e] shadow-lg transition-transform will-change-transform hover:z-50 hover:scale-105 lg:hover:scale-125',
+          'transition-z group z-0 flex flex-1 flex-col overflow-hidden border-4 border-[#2c2e2e] shadow-lg transition-all will-change-transform hover:z-50 hover:scale-105 lg:hover:scale-110 xl:hover:scale-125',
           className,
         )}
       >
@@ -30,12 +30,16 @@ export const HeroTile = ({ hero, className }: Props) => {
             <div className="absolute bottom-0 h-1/2 w-full bg-gradient-to-t from-black/80 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             <span
               style={{ textShadow: '4px 4px black' }}
-              className={`${myFont.className} absolute bottom-[0px] left-[10px] text-4xl font-bold leading-10 tracking-widest text-amber-300 opacity-0 mix-blend-luminosity transition-opacity duration-300 group-hover:opacity-100`}
+              className={`${myFont.className} absolute bottom-[0px] left-[10px] text-4xl font-bold leading-10 tracking-widest text-amber-300 opacity-0 mix-blend-luminosity transition-opacity duration-300 [word-spacing:-5px] group-hover:opacity-100`}
             >
               {hero.name}
             </span>
             <CtfImage
-              nextImageProps={{ className: 'object-cover aspect-[16/10] w-full object-top' }}
+              nextImageProps={{
+                className: `object-cover aspect-[16/10] w-full ${
+                  hero.featuredImageFit ?? 'object-top'
+                }`,
+              }}
               {...hero.featuredImage}
             />
           </div>

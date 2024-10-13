@@ -36,7 +36,7 @@ export const HeroView = ({ hero }: Props) => {
 
   const renderDetailsSquares = (className: ComponentProps<'div'>['className']) => {
     return (
-      <div className={`flex w-full flex-row lg:w-[60%] ${className}`}>
+      <div className={`flex w-full flex-row md:w-[60%] ${className}`}>
         <div className="flex aspect-square w-1/6 flex-col items-center justify-center border-2 border-[#2c2e2e]">
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -93,7 +93,7 @@ export const HeroView = ({ hero }: Props) => {
   };
 
   return (
-    <div className="flex flex-col overflow-hidden border-4 border-[#2c2e2e] shadow-lg lg:flex-row">
+    <div className="flex flex-col overflow-hidden border-4 border-[#2c2e2e] shadow-lg md:max-w-[700px] 2xl:max-w-none 2xl:flex-row">
       <div className="flex-1 basis-1/2" {...inspectorProps({ fieldId: 'featuredImage' })}>
         {hero.featuredImage && (
           <CtfImage
@@ -110,20 +110,20 @@ export const HeroView = ({ hero }: Props) => {
         />
         <div className="z-10 flex w-full flex-col p-4 lg:p-8">
           <div className="flex justify-between">
-            <div className="flex h-full w-full flex-col justify-between lg:w-4/5">
-              <div className="flex flex-row pb-1.5 lg:h-20 lg:pr-2">
-                <div className="h-full lg:overflow-hidden">
-                  <div className="pb-1 text-4xl font-bold leading-10 lg:float-left lg:pr-2">
+            <div className="flex h-full w-full flex-col justify-between md:w-4/5">
+              <div className="flex flex-row pb-1.5 md:h-20 md:pr-2">
+                <div className="h-full md:overflow-hidden">
+                  <div className="pb-1 text-4xl font-bold leading-10 md:float-left md:pr-2">
                     {hero.name}
                   </div>
-                  <div className="mt-2 h-full text-justify text-xs leading-[15px] lg:mt-0">
-                    {renderAvatar('block float-right ml-2 lg:hidden min-w-[128px] min-h-[128px]')}
+                  <div className="mt-2 h-full text-justify text-xs leading-[15px] md:mt-0">
+                    {renderAvatar('block float-right ml-2 md:hidden min-w-[128px] min-h-[128px]')}
                     {hero.shortDescription}
                   </div>
                 </div>
               </div>
-              <div className="flex flex-wrap lg:flex-nowrap">
-                <div className="flex h-12 basis-1/2 items-center border-2 border-[#2c2e2e] bg-red-900 px-1 py-3 lg:basis-1/4">
+              <div className="flex flex-wrap md:flex-nowrap">
+                <div className="flex h-12 basis-1/2 items-center border-2 border-[#2c2e2e] bg-red-900 px-1 py-3 md:basis-1/4">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     alt="Strengthlogo"
@@ -145,7 +145,7 @@ export const HeroView = ({ hero }: Props) => {
                     <div className="pl-1 text-lg font-bold">(+{hero.strGain?.toFixed(1)})</div>
                   </div>
                 </div>
-                <div className="flex h-12 basis-1/2 items-center border-2 border-[#2c2e2e] bg-green-900 px-1 py-3 lg:basis-1/4">
+                <div className="flex h-12 basis-1/2 items-center border-2 border-[#2c2e2e] bg-green-900 px-1 py-3 md:basis-1/4">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     alt="Agilitylogo"
@@ -169,7 +169,7 @@ export const HeroView = ({ hero }: Props) => {
                     <div className="pl-1 text-lg font-bold">(+{hero.agiGain?.toFixed(1)})</div>
                   </div>
                 </div>
-                <div className="flex h-12 basis-1/2 items-center border-2 border-[#2c2e2e] bg-blue-900 px-1 py-3 lg:basis-1/4">
+                <div className="flex h-12 basis-1/2 items-center border-2 border-[#2c2e2e] bg-blue-900 px-1 py-3 md:basis-1/4">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     alt="Intelligencelogo"
@@ -193,7 +193,7 @@ export const HeroView = ({ hero }: Props) => {
                     <div className="pl-1 text-lg font-bold">(+{hero.intGain?.toFixed(1)})</div>
                   </div>
                 </div>
-                <div className="flex h-12 basis-1/2 flex-col items-stretch border-2 border-[#2c2e2e] bg-blue-900 lg:basis-1/4">
+                <div className="flex h-12 basis-1/2 flex-col items-stretch border-2 border-[#2c2e2e] bg-blue-900 md:basis-1/4">
                   <div className="flex h-1/2 items-center justify-center bg-gradient-to-r from-green-800 to-green-500">
                     {150 + (hero.str ?? 0) * 19}
                   </div>
@@ -203,12 +203,12 @@ export const HeroView = ({ hero }: Props) => {
                 </div>
               </div>
             </div>
-            {renderAvatar('hidden lg:block')}
+            {renderAvatar('hidden md:block')}
           </div>
           <div className="my-2 border-2 border-[#2c2e2e]" />
-          {renderDetailsSquares('flex lg:hidden')}
+          {renderDetailsSquares('flex md:hidden')}
           <div className="flex">
-            <div className="aspect-square w-1/6 border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-125 lg:w-[10%]">
+            <div className="aspect-square w-1/6 border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-125 md:w-[10%]">
               {hero.skill1Image && (
                 <Link href={{ hash: 'skill-1' }}>
                   <CtfImage
@@ -218,7 +218,7 @@ export const HeroView = ({ hero }: Props) => {
                 </Link>
               )}
             </div>
-            <div className="aspect-square w-1/6 border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-125 lg:w-[10%]">
+            <div className="aspect-square w-1/6 border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-125 md:w-[10%]">
               {hero.skill2Image && (
                 <Link href={{ hash: 'skill-2' }}>
                   <CtfImage
@@ -228,7 +228,7 @@ export const HeroView = ({ hero }: Props) => {
                 </Link>
               )}
             </div>
-            <div className="aspect-square w-1/6 border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-125 lg:w-[10%]">
+            <div className="aspect-square w-1/6 border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-125 md:w-[10%]">
               {hero.skill3Image && (
                 <Link href={{ hash: 'skill-3' }}>
                   <CtfImage
@@ -238,7 +238,7 @@ export const HeroView = ({ hero }: Props) => {
                 </Link>
               )}
             </div>
-            <div className="aspect-square w-1/6 border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-125 lg:w-[10%]">
+            <div className="aspect-square w-1/6 border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-125 md:w-[10%]">
               {hero.skill4Image && (
                 <Link href={{ hash: 'skill-4' }}>
                   <CtfImage
@@ -248,7 +248,7 @@ export const HeroView = ({ hero }: Props) => {
                 </Link>
               )}
             </div>
-            {renderDetailsSquares('hidden lg:flex')}
+            {renderDetailsSquares('hidden md:flex')}
           </div>
           <div className="relative mt-2 min-h-[400px] flex-grow border-2 border-[#2c2e2e]">
             <div className="absolute h-full w-full bg-black opacity-20" />
