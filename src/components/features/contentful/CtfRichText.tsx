@@ -32,6 +32,18 @@ export const contentfulBaseRichTextOptions = ({ links }: ContentfulRichTextInter
     return <SanitizedHTML html={text} />;
   },
   renderNode: {
+    [BLOCKS.PARAGRAPH]: (node, children) => {
+      if (
+        node &&
+        Array.isArray(node.content) &&
+        node.content.length === 1 &&
+        'value' in node.content[0] &&
+        node.content[0]?.value?.trim() === ''
+      ) {
+        return null;
+      }
+      return <p>{children}</p>;
+    },
     [BLOCKS.EMBEDDED_ENTRY]: node => {
       const entry = links?.entries?.block?.find(
         (item: EmbeddedEntryType) => item?.sys?.id === node.data.target.sys.id,

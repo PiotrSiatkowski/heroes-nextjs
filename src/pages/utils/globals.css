@@ -38,7 +38,14 @@
 
   .h4,
   h4 {
-    @apply text-xs font-semibold leading-normal md:text-base;
+    @apply text-base font-semibold leading-normal;
+  }
+
+  .h5,
+  h5 {
+    @apply text-sm font-semibold leading-normal;
+    margin-bottom: -10px;
+    margin-top: 16px;
   }
 
   p {
@@ -62,11 +69,43 @@
 .prose.prose-custom .cld {
   color: #cbbd44;
   font-weight: bold;
+  letter-spacing: 0.017px;
+}
+
+.prose.prose-custom .cst {
+  color: #ababab;
+  font-weight: bold;
+  letter-spacing: 0.337px;
 }
 
 .prose.prose-custom .dmg {
   color: #ffaa00;
   font-weight: bold;
+}
+
+.prose.prose-custom .red {
+  color: #ed2939;
+  font-weight: bold;
+}
+
+.prose.prose-custom .rad {
+  font-weight: bold;
+  letter-spacing: -0.344px;
+}
+
+.prose.prose-custom .rng {
+  font-weight: bold;
+  letter-spacing: -0.014px;
+}
+
+.prose.prose-custom .trg {
+  font-weight: bold;
+  letter-spacing: 0.323px;
+}
+
+.prose.prose-custom .prc {
+  font-weight: bold;
+  letter-spacing: 0.212px;
 }
 
 .prose.prose-custom .syn {
@@ -79,4 +118,12 @@
 
 .prose.prose-custom h4 + ul {
   margin-top: -8px;
+}
+
+.prose.prose-custom ul {
+  margin-bottom: 0;
+}
+
+.prose.prose-custom li:last-of-type {
+  margin-bottom: 0;
 }

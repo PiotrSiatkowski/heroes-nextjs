@@ -11,11 +11,12 @@ interface Props {
     | 'skill3Description'
     | 'skill4Description'];
 }
+
 export const HeroSkillDescription = ({ description, entryId }: Props) => {
   const inspectorProps = useContentfulInspectorMode({ entryId });
 
   return (
-    <div {...inspectorProps({ fieldId: 'content' })}>
+    <div {...inspectorProps({ fieldId: 'content' })} className="whitespace-pre-wrap text-justify">
       <CtfRichText json={description?.json} links={description?.links} />
     </div>
   );

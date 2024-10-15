@@ -4,6 +4,12 @@ const { fontFamily } = require('tailwindcss/defaultTheme');
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    theme: {
+      screens: {
+        xs: '640px',
+        // => @media (min-width: 640px) { ... }
+      },
+    },
     extend: {
       maxWidth: {
         '8xl': '90rem',
@@ -27,9 +33,9 @@ module.exports = {
           css: {
             '--tw-prose-bullets': theme('colors.slate[400]'),
             '--tw-prose-invert-bullets': theme('colors.slate[100]'),
-          }
-        }
-      })
+          },
+        },
+      }),
     },
   },
   plugins: [require('@tailwindcss/typography')],

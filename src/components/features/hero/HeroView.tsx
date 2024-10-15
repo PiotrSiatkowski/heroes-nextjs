@@ -86,8 +86,37 @@ export const HeroView = ({ hero }: Props) => {
           href={{ hash: 'description' }}
           className="flex aspect-square w-1/6 flex-col items-center justify-center border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-125"
         >
-          <div className="pointer-events-none text-4xl text-amber-600">?</div>
+          <div
+            className={`group flex h-full w-full items-center justify-center text-4xl ${
+              hash === 'description' ? 'opacity-100' : 'opacity-50 hover:opacity-70'
+            }`}
+          >
+            <div className="pointer-events-none text-4xl text-amber-600">?</div>
+          </div>
         </Link>
+      </div>
+    );
+  };
+
+  const renderSkillBox = (skill, image) => {
+    return (
+      <div className="relative aspect-square w-1/6 border-2 border-[#2c2e2e] bg-black transition-transform hover:z-50 hover:scale-125 md:w-[10%]">
+        {hero.skill1Image && (
+          <Link href={{ hash: skill }}>
+            <div
+              className={
+                hash === skill || (!hash && skill === 'skill-1')
+                  ? undefined
+                  : 'opacity-50 hover:opacity-70'
+              }
+            >
+              <CtfImage
+                nextImageProps={{ className: 'w-full', priority: true, sizes: undefined }}
+                {...image}
+              />
+            </div>
+          </Link>
+        )}
       </div>
     );
   };
@@ -116,7 +145,7 @@ export const HeroView = ({ hero }: Props) => {
                   <div className="pb-1 text-4xl font-bold leading-10 md:float-left md:pr-2">
                     {hero.name}
                   </div>
-                  <div className="mt-2 h-full text-justify text-xs leading-[15px] md:mt-0">
+                  <div className="mt-2 h-full hyphens-auto text-justify text-xs leading-[15px] md:mt-0">
                     {renderAvatar('block float-right ml-2 md:hidden min-w-[128px] min-h-[128px]')}
                     {hero.shortDescription}
                   </div>
@@ -208,53 +237,17 @@ export const HeroView = ({ hero }: Props) => {
           <div className="my-2 border-2 border-[#2c2e2e]" />
           {renderDetailsSquares('flex md:hidden')}
           <div className="flex">
-            <div className="aspect-square w-1/6 border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-125 md:w-[10%]">
-              {hero.skill1Image && (
-                <Link href={{ hash: 'skill-1' }}>
-                  <CtfImage
-                    nextImageProps={{ className: 'w-full', priority: true, sizes: undefined }}
-                    {...hero.skill1Image}
-                  />
-                </Link>
-              )}
-            </div>
-            <div className="aspect-square w-1/6 border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-125 md:w-[10%]">
-              {hero.skill2Image && (
-                <Link href={{ hash: 'skill-2' }}>
-                  <CtfImage
-                    nextImageProps={{ className: 'w-full', priority: true, sizes: undefined }}
-                    {...hero.skill2Image}
-                  />
-                </Link>
-              )}
-            </div>
-            <div className="aspect-square w-1/6 border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-125 md:w-[10%]">
-              {hero.skill3Image && (
-                <Link href={{ hash: 'skill-3' }}>
-                  <CtfImage
-                    nextImageProps={{ className: 'w-full', priority: true, sizes: undefined }}
-                    {...hero.skill3Image}
-                  />
-                </Link>
-              )}
-            </div>
-            <div className="aspect-square w-1/6 border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-125 md:w-[10%]">
-              {hero.skill4Image && (
-                <Link href={{ hash: 'skill-4' }}>
-                  <CtfImage
-                    nextImageProps={{ className: 'w-full', priority: true, sizes: undefined }}
-                    {...hero.skill4Image}
-                  />
-                </Link>
-              )}
-            </div>
+            {renderSkillBox('skill-1', hero.skill1Image)}
+            {renderSkillBox('skill-2', hero.skill2Image)}
+            {renderSkillBox('skill-3', hero.skill3Image)}
+            {renderSkillBox('skill-4', hero.skill4Image)}
             {renderDetailsSquares('hidden md:flex')}
           </div>
           <div className="relative mt-2 min-h-[400px] flex-grow border-2 border-[#2c2e2e]">
             <div className="absolute h-full w-full bg-black opacity-20" />
             <div className="absolute h-full w-full overflow-y-auto p-2 text-slate-50">
               {!isClient || hash === 'description' ? (
-                <Markdown className="prose-custom prose prose-sm prose-slate max-w-none dark:prose-invert">
+                <Markdown className="prose-custom prose prose-sm prose-slate max-w-none text-justify dark:prose-invert">
                   {hero.description}
                 </Markdown>
               ) : (
