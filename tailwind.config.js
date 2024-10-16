@@ -26,7 +26,7 @@ module.exports = {
         tighter: 1.1,
       },
       fontFamily: {
-        sans: ['Arial', ...fontFamily.sans],
+        sans: ['Arial'],
       },
       typography: ({ theme }) => ({
         slate: {
