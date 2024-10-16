@@ -2153,10 +2153,15 @@ export type AuthorFieldsFragment = { __typename: 'ComponentAuthor', name?: strin
 
 export type ImageFieldsFragment = { __typename: 'Asset', title?: string | null, description?: string | null, width?: number | null, height?: number | null, url?: string | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } };
 
+export type ImageFieldsNoUrlFragment = { __typename: 'Asset', title?: string | null, description?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } };
+
 export type ReferencePageHeroFieldsFragment = { __typename: 'PageHero', slug?: string | null, name?: string | null, featuredImageFit?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, avatar?: (
-    { __typename?: 'Asset' }
-    & ImageFieldsFragment
-  ) | null, featuredImage?: { __typename: 'Asset', title?: string | null, description?: string | null, width?: number | null, height?: number | null, contentType?: string | null, url?: string | null, sys: { __typename?: 'Sys', id: string } } | null };
+    { __typename?: 'Asset', url?: string | null }
+    & ImageFieldsNoUrlFragment
+  ) | null, featuredImage?: (
+    { __typename?: 'Asset', url?: string | null }
+    & ImageFieldsNoUrlFragment
+  ) | null };
 
 export type PageHeroFieldsFragment = { __typename: 'PageHero', internalName?: string | null, slug?: string | null, publishedDate?: any | null, isLegion?: boolean | null, armor?: number | null, attackMin?: number | null, attackMax?: number | null, range?: number | null, speed?: number | null, attribute?: string | null, name?: string | null, str?: number | null, strGain?: number | null, agi?: number | null, agiGain?: number | null, int?: number | null, intGain?: number | null, description?: string | null, shortDescription?: string | null, featuredImageFit?: string | null, sys: { __typename?: 'Sys', id: string, spaceId: string }, seoFields?: (
     { __typename?: 'ComponentSeo' }
@@ -2164,13 +2169,7 @@ export type PageHeroFieldsFragment = { __typename: 'PageHero', internalName?: st
   ) | null, author?: (
     { __typename?: 'ComponentAuthor' }
     & AuthorFieldsFragment
-  ) | null, featuredImage?: (
-    { __typename?: 'Asset' }
-    & ImageFieldsFragment
-  ) | null, avatar?: (
-    { __typename?: 'Asset' }
-    & ImageFieldsFragment
-  ) | null, skill1Image?: (
+  ) | null, featuredImage?: { __typename: 'Asset', title?: string | null, description?: string | null, width?: number | null, height?: number | null, contentType?: string | null, url?: string | null, sys: { __typename?: 'Sys', id: string } } | null, avatar?: { __typename: 'Asset', title?: string | null, description?: string | null, width?: number | null, height?: number | null, contentType?: string | null, url?: string | null, sys: { __typename?: 'Sys', id: string } } | null, skill1Image?: (
     { __typename?: 'Asset' }
     & ImageFieldsFragment
   ) | null, skill2Image?: (
@@ -2274,8 +2273,8 @@ export type SitemapPagesQuery = (
   & SitemapPagesFieldsFragment
 );
 
-export const ImageFieldsFragmentDoc = gql`
-    fragment ImageFields on Asset {
+export const ImageFieldsNoUrlFragmentDoc = gql`
+    fragment ImageFieldsNoURL on Asset {
   __typename
   sys {
     id
@@ -2284,7 +2283,6 @@ export const ImageFieldsFragmentDoc = gql`
   description
   width
   height
-  url
   contentType
 }
     `;
@@ -2298,21 +2296,28 @@ export const ReferencePageHeroFieldsFragmentDoc = gql`
   slug
   name
   avatar {
-    ...ImageFields
+    ...ImageFieldsNoURL
+    url(transform: {width: 128, height: 128, format: JPG})
   }
   featuredImageFit
   featuredImage {
-    __typename
-    sys {
-      id
-    }
-    title
-    description
-    width
-    height
-    contentType
-    url(transform: {width: 512, height: 512, format: JPG, quality: 70})
+    ...ImageFieldsNoURL
+    url(transform: {width: 567, height: 567, format: JPG})
   }
+}
+    `;
+export const ImageFieldsFragmentDoc = gql`
+    fragment ImageFields on Asset {
+  __typename
+  sys {
+    id
+  }
+  title
+  description
+  width
+  height
+  url
+  contentType
 }
     `;
 export const SeoFieldsFragmentDoc = gql`
@@ -2390,10 +2395,28 @@ export const PageHeroFieldsFragmentDoc = gql`
   shortDescription
   featuredImageFit
   featuredImage {
-    ...ImageFields
+    __typename
+    sys {
+      id
+    }
+    title
+    description
+    width
+    height
+    contentType
+    url(transform: {width: 700, height: 700, format: JPG})
   }
   avatar {
-    ...ImageFields
+    __typename
+    sys {
+      id
+    }
+    title
+    description
+    width
+    height
+    contentType
+    url(transform: {width: 128, height: 128, format: JPG})
   }
   skill1Image {
     ...ImageFields
@@ -2517,7 +2540,7 @@ export const PageHeroCollectionDocument = gql`
   }
 }
     ${ReferencePageHeroFieldsFragmentDoc}
-${ImageFieldsFragmentDoc}`;
+${ImageFieldsNoUrlFragmentDoc}`;
 export const PageLandingDocument = gql`
     query pageLanding($locale: String, $preview: Boolean) {
   pageLandingCollection(limit: 1, locale: $locale, preview: $preview) {

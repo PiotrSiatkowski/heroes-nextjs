@@ -10,3 +10,15 @@ fragment ImageFields on Asset {
   url
   contentType
 }
+
+fragment ImageFieldsNoURL on Asset {
+  __typename
+  sys {
+    id
+  }
+  title
+  description
+  width
+  height
+  contentType
+}

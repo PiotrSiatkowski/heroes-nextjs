@@ -23,10 +23,16 @@ export const HeroView = ({ hero }: Props) => {
 
   const renderAvatar = (className: ComponentProps<'div'>['className']) => {
     return (
-      <div className={`h-32 w-1/5 border-2 border-[#2c2e2e] ${className}`}>
+      <div className={`relative h-32 w-1/5 border-2 border-[#2c2e2e] ${className}`}>
         {hero.avatar && (
           <CtfImage
-            nextImageProps={{ className: 'w-full h-full', priority: true, sizes: undefined }}
+            nextImageProps={{
+              width: 128,
+              height: 128,
+              className: 'w-full h-full',
+              priority: true,
+              sizes: undefined,
+            }}
             {...hero.avatar}
           />
         )}
@@ -111,7 +117,13 @@ export const HeroView = ({ hero }: Props) => {
               }
             >
               <CtfImage
-                nextImageProps={{ className: 'w-full', priority: true, sizes: undefined }}
+                nextImageProps={{
+                  className: 'w-full',
+                  priority: true,
+                  sizes: undefined,
+                  width: 64,
+                  height: 64,
+                }}
                 {...image}
               />
             </div>
@@ -126,7 +138,13 @@ export const HeroView = ({ hero }: Props) => {
       <div className="flex-1 basis-1/2" {...inspectorProps({ fieldId: 'featuredImage' })}>
         {hero.featuredImage && (
           <CtfImage
-            nextImageProps={{ className: 'w-full', priority: true, sizes: undefined }}
+            nextImageProps={{
+              className: 'w-full',
+              priority: true,
+              sizes: undefined,
+              width: 700,
+              height: 700,
+            }}
             {...hero.featuredImage}
           />
         )}

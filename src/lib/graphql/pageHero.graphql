@@ -7,20 +7,13 @@ fragment ReferencePageHeroFields on PageHero {
   slug
   name
   avatar {
-    ...ImageFields
+    ...ImageFieldsNoURL
+    url(transform: { width: 128, height: 128, format: JPG })
   }
   featuredImageFit
   featuredImage {
-    __typename
-    sys {
-      id
-    }
-    title
-    description
-    width
-    height
-    contentType
-    url(transform: { width: 512, height: 512, format: JPG, quality: 70 })
+    ...ImageFieldsNoURL
+    url(transform: { width: 567, height: 567, format: JPG })
   }
 }
 
@@ -57,10 +50,28 @@ fragment PageHeroFields on PageHero {
   shortDescription
   featuredImageFit
   featuredImage {
-    ...ImageFields
+    __typename
+    sys {
+      id
+    }
+    title
+    description
+    width
+    height
+    contentType
+    url(transform: { width: 700, height: 700, format: JPG })
   }
   avatar {
-    ...ImageFields
+    __typename
+    sys {
+      id
+    }
+    title
+    description
+    width
+    height
+    contentType
+    url(transform: { width: 128, height: 128, format: JPG })
   }
   skill1Image {
     ...ImageFields

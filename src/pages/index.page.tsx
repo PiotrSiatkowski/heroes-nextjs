@@ -55,7 +55,6 @@ export const getStaticProps: GetStaticProps<{
     const page = landingPageData.pageLandingCollection?.items[0];
 
     const heroesData = await gqlClient.pageHeroCollection({
-      limit: 6,
       locale,
       order: PageHeroOrder.PublishedDateDesc,
       where: {

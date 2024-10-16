@@ -1,16 +1,11 @@
-const { fontFamily } = require('tailwindcss/defaultTheme');
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    theme: {
-      screens: {
-        xs: '640px',
-        // => @media (min-width: 640px) { ... }
-      },
-    },
     extend: {
+      screens: {
+        xs: '590px',
+      },
       maxWidth: {
         '8xl': '90rem',
       },

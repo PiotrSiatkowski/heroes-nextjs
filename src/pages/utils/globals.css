@@ -64,18 +64,19 @@
 .prose.prose-custom .man {
   color: rgb(101, 165, 224);
   font-weight: bold;
+  letter-spacing: 0.103px;
 }
 
 .prose.prose-custom .cld {
   color: #cbbd44;
   font-weight: bold;
-  letter-spacing: 0.017px;
+  letter-spacing: 0.021px;
 }
 
 .prose.prose-custom .cst {
   color: #ababab;
   font-weight: bold;
-  letter-spacing: 0.337px;
+  letter-spacing: 0.563px;
 }
 
 .prose.prose-custom .dmg {
@@ -90,22 +91,22 @@
 
 .prose.prose-custom .rad {
   font-weight: bold;
-  letter-spacing: -0.344px;
+  letter-spacing: -0.334px;
 }
 
 .prose.prose-custom .rng {
   font-weight: bold;
-  letter-spacing: -0.014px;
+  letter-spacing: 0.258px;
 }
 
 .prose.prose-custom .trg {
   font-weight: bold;
-  letter-spacing: 0.323px;
+  letter-spacing: 0.370px;
 }
 
 .prose.prose-custom .prc {
   font-weight: bold;
-  letter-spacing: 0.212px;
+  letter-spacing: 0.329px;
 }
 
 .prose.prose-custom .syn {

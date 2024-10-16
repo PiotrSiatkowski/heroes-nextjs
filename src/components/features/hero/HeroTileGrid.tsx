@@ -12,7 +12,7 @@ export const HeroTileGrid = ({ heroes, className, ...props }: Props) => {
   return heroes && heroes.length > 0 ? (
     <div
       className={twMerge(
-        'grid grid-cols-1 gap-y-2 gap-x-2 md:grid-cols-3 lg:gap-x-3 lg:gap-y-3',
+        'grid grid-cols-1 gap-x-2 gap-y-2 xs:grid-cols-2 lg:grid-cols-3 lg:gap-x-3 lg:gap-y-3',
         className,
       )}
       {...props}
