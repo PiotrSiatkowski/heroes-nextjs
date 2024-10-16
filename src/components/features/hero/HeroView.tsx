@@ -27,11 +27,11 @@ export const HeroView = ({ hero }: Props) => {
         {hero.avatar && (
           <CtfImage
             nextImageProps={{
+              sizes: '128px',
               width: 128,
               height: 128,
               className: 'w-full h-full',
               priority: true,
-              sizes: undefined,
             }}
             {...hero.avatar}
           />
@@ -265,7 +265,7 @@ export const HeroView = ({ hero }: Props) => {
             <div className="absolute h-full w-full bg-black opacity-20" />
             <div className="absolute h-full w-full overflow-y-auto p-2 text-slate-50">
               {!isClient || hash === 'description' ? (
-                <Markdown className="prose-custom prose prose-sm prose-slate max-w-none text-justify dark:prose-invert">
+                <Markdown className="prose-custom prose prose-sm !prose-invert prose-slate max-w-none text-justify dark:prose-invert">
                   {hero.description}
                 </Markdown>
               ) : (
