@@ -2,9 +2,15 @@ import { ContentfulLivePreviewProvider } from '@contentful/live-preview/react';
 import { appWithTranslation } from 'next-i18next';
 import type { AppProps } from 'next/app';
 import './utils/globals.css';
+import localFont from 'next/font/local';
 import { useRouter } from 'next/router';
 
 import { Layout } from '@src/components/templates/layout';
+
+const arial = localFont({
+  src: '../../public/fonts/ArialBold.ttf',
+  variable: '--font-urbanist',
+});
 
 const App = ({ Component, pageProps }: AppProps) => {
   const { locale } = useRouter();
@@ -15,12 +21,12 @@ const App = ({ Component, pageProps }: AppProps) => {
       locale={locale || 'en-US'}
     >
       <>
-        <main className="font-sans">
+        <main className={`${arial.variable} font-sans`}>
           <Layout>
             <Component {...pageProps} />
           </Layout>
         </main>
-        <div id="portal" className="font-sans" />
+        <div id="portal" className={`${arial.variable} font-sans`} />
       </>
     </ContentfulLivePreviewProvider>
   );

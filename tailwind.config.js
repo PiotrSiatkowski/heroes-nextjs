@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const { fontFamily } = require('tailwindcss/defaultTheme');
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
@@ -21,7 +22,7 @@ module.exports = {
         tighter: 1.1,
       },
       fontFamily: {
-        sans: ['Arial'],
+        sans: ['var(--font-urbanist)', ...fontFamily.sans, 'Arial'],
       },
       typography: ({ theme }) => ({
         slate: {

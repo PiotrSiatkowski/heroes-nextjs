@@ -16,7 +16,10 @@ export const HeroSkillDescription = ({ description, entryId }: Props) => {
   const inspectorProps = useContentfulInspectorMode({ entryId });
 
   return (
-    <div {...inspectorProps({ fieldId: 'content' })} className="whitespace-pre-wrap text-justify">
+    <div
+      {...inspectorProps({ fieldId: 'content' })}
+      className="hyphens-auto whitespace-pre-wrap text-justify"
+    >
       <CtfRichText json={description?.json} links={description?.links} />
     </div>
   );
