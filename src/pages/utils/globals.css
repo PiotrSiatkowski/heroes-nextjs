@@ -41,21 +41,30 @@
 
   .h4,
   h4 {
-    @apply text-base font-semibold leading-normal;
+    @apply text-sm font-semibold leading-normal;
     word-break: break-all;
+    font-size: 15px;
+    color: var(--tw-prose-heading);
   }
 
   .h5,
   h5 {
     @apply text-sm font-semibold leading-normal;
-    margin-bottom: -10px;
+    margin-bottom: -14px;
     margin-top: 16px;
+    font-size: 15px;
     word-break: break-all;
+    color: var(--tw-prose-heading);
   }
 
   p {
     @apply font-normal leading-snug tracking-snug md:leading-normal;
   }
+}
+
+b,
+strong {
+  color: #dbe5f1;
 }
 
 .prose.prose-custom div {
@@ -69,19 +78,19 @@
 .prose.prose-custom .man {
   color: rgb(101, 165, 224);
   font-weight: bold;
-  letter-spacing: 0.006rem;
+  letter-spacing: 0.0055rem;
 }
 
 .prose.prose-custom .cld {
   color: #cbbd44;
   font-weight: bold;
-  letter-spacing: 0.001rem;
+  letter-spacing: 0.0163rem;
 }
 
 .prose.prose-custom .cst {
   color: #ababab;
   font-weight: bold;
-  letter-spacing: 0.035rem;
+  letter-spacing: 0.0363rem;
 }
 
 .prose.prose-custom .dmg {
@@ -94,24 +103,28 @@
   font-weight: bold;
 }
 
-.prose.prose-custom .rad {
-  font-weight: bold;
-  letter-spacing: -0.021rem;
-}
-
 .prose.prose-custom .rng {
   font-weight: bold;
-  letter-spacing: 0.016rem;
+  letter-spacing: 0.0192rem;
+  color: #dbe5f1;
+}
+
+.prose.prose-custom .rad {
+  font-weight: bold;
+  letter-spacing: -0.0042rem;
+  color: #dbe5f1;
 }
 
 .prose.prose-custom .trg {
   font-weight: bold;
-  letter-spacing: 0.023rem;
+  letter-spacing: 0.0374rem;
+  color: #dbe5f1;
 }
 
 .prose.prose-custom .prc {
   font-weight: bold;
-  letter-spacing: 0.021rem;
+  letter-spacing: 0.0306rem;
+  color: #dbe5f1;
 }
 
 .prose.prose-custom .syn {

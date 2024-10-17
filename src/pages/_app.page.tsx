@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import { Layout } from '@src/components/templates/layout';
 
 const arial = localFont({
-  src: '../../public/fonts/ArialBold.ttf',
+  src: '../../public/fonts/Arial.ttf',
   variable: '--font-urbanist',
 });
 
