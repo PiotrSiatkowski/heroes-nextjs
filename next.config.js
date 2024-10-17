@@ -58,7 +58,7 @@ module.exports = withPlugins(plugins, {
    */
   images: {
     domains: ['images.ctfassets.net', 'images.eu.ctfassets.net', 'static.wikia.nocookie.net'],
-    deviceSizes: [700, 1024, 2048],
+    deviceSizes: [700, 1400, 2048],
     imageSizes: [128, 319, 330, 341, 368, 567],
   },
 

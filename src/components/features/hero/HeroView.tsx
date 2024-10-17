@@ -21,6 +21,8 @@ export const HeroView = ({ hero }: Props) => {
     setIsClient(true);
   }, []);
 
+  const calculatedHash = !isClient || hash === 'description' ? 'description' : hash;
+
   const renderAvatar = (className: ComponentProps<'div'>['className']) => {
     return (
       <div className={`relative h-32 w-1/5 border-2 border-[#2c2e2e] ${className}`}>
@@ -94,7 +96,7 @@ export const HeroView = ({ hero }: Props) => {
         >
           <div
             className={`group flex h-full w-full items-center justify-center text-4xl ${
-              hash === 'description' ? 'opacity-100' : 'opacity-50 hover:opacity-70'
+              calculatedHash === 'description' ? 'opacity-100' : 'opacity-50 hover:opacity-70'
             }`}
           >
             <div className="pointer-events-none text-4xl text-amber-600">?</div>
@@ -109,13 +111,7 @@ export const HeroView = ({ hero }: Props) => {
       <div className="relative aspect-square w-1/6 border-2 border-[#2c2e2e] bg-black transition-transform hover:z-50 hover:scale-125 md:w-[10%]">
         {hero.skill1Image && (
           <Link href={{ hash: skill }}>
-            <div
-              className={
-                hash === skill || (!hash && skill === 'skill-1')
-                  ? undefined
-                  : 'opacity-50 hover:opacity-70'
-              }
-            >
+            <div className={calculatedHash === skill ? undefined : 'opacity-50 hover:opacity-70'}>
               <CtfImage
                 nextImageProps={{
                   className: 'w-full',
@@ -264,7 +260,7 @@ export const HeroView = ({ hero }: Props) => {
           <div className="relative mt-2 min-h-[500px] flex-grow border-2 border-[#2c2e2e] 2xl:min-h-[400px]">
             <div className="absolute h-full w-full bg-black opacity-20" />
             <div className="absolute h-full w-full overflow-y-auto p-2 text-slate-50">
-              {!isClient || hash === 'description' ? (
+              {calculatedHash === 'description' ? (
                 <Markdown className="prose-custom prose prose-sm !prose-invert prose-slate max-w-none text-justify dark:prose-invert">
                   {hero.description}
                 </Markdown>
@@ -272,13 +268,13 @@ export const HeroView = ({ hero }: Props) => {
                 <HeroSkillDescription
                   entryId={hero.sys.id}
                   description={
-                    !isClient || hash === 'description'
+                    calculatedHash === 'description'
                       ? null
-                      : hash === 'skill-4'
+                      : calculatedHash === 'skill-4'
                       ? hero.skill4Description
-                      : hash === 'skill-3'
+                      : calculatedHash === 'skill-3'
                       ? hero.skill3Description
-                      : hash === 'skill-2'
+                      : calculatedHash === 'skill-2'
                       ? hero.skill2Description
                       : hero.skill1Description
                   }

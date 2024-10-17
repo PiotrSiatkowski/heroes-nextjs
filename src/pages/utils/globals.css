@@ -135,12 +135,16 @@ strong {
   @apply text-green-500;
 }
 
+.prose.prose-custom .ul {
+  margin-top: -8px !important;
+}
+
 .prose.prose-custom h4 + ul {
-  margin-top: -8px;
+  margin-top: -4px;
 }
 
 .prose.prose-custom ul {
-  margin-bottom: 0;
+  margin-top: -12px;
 }
 
 .prose.prose-custom li:last-of-type {
