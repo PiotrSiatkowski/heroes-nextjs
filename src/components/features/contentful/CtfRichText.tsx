@@ -29,7 +29,7 @@ export const EmbeddedEntry = (entry: EmbeddedEntryType) => {
 
 export const contentfulBaseRichTextOptions = ({ links }: ContentfulRichTextInterface): Options => ({
   renderText: text => {
-    return <SanitizedHTML html={text.replace(/\//g, '/&#8203;')} />;
+    return <SanitizedHTML html={text.replace(/\/(\d)/g, '/&#8203;$1')} />;
   },
   renderNode: {
     [BLOCKS.PARAGRAPH]: (node, children) => {

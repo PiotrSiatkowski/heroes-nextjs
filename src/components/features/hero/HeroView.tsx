@@ -261,7 +261,7 @@ export const HeroView = ({ hero }: Props) => {
             {renderSkillBox('skill-4', hero.skill4Image)}
             {renderDetailsSquares('hidden md:flex')}
           </div>
-          <div className="relative mt-2 min-h-[400px] flex-grow border-2 border-[#2c2e2e]">
+          <div className="relative mt-2 min-h-[500px] flex-grow border-2 border-[#2c2e2e] 2xl:min-h-[400px]">
             <div className="absolute h-full w-full bg-black opacity-20" />
             <div className="absolute h-full w-full overflow-y-auto p-2 text-slate-50">
               {!isClient || hash === 'description' ? (
