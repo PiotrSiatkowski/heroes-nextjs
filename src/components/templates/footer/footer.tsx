@@ -14,12 +14,12 @@ export const Footer = () => {
         <div className="mt-8">
           {t('footer.powerBy')}{' '}
           <Link
-            href="mailto:mymail@here"
+            href="mailto:heroes.suggestions@gmail.com"
             rel="noopener noreferrer"
             target="_blank"
             className="text-blue-500"
           >
-            mymail@here
+            heroes.suggestions@gmail.com
           </Link>
         </div>
       </Container>

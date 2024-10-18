@@ -21,16 +21,16 @@ export const HeroTile = ({ hero, className }: Props) => {
     <Link className="flex flex-col" href={`/${hero.slug}`}>
       <div
         className={twMerge(
-          'transition-z group z-0 flex flex-1 flex-col overflow-hidden border-4 border-[#2c2e2e] shadow-lg transition-all will-change-transform hover:z-50 lg:hover:scale-110 2xl:hover:scale-125',
+          'transition-z group z-0 flex flex-1 flex-col overflow-hidden border-4 border-[#2c2e2e] shadow-lg transition-all will-change-transform hover:z-50 xl:hover:scale-110 2xl:hover:scale-125',
           className,
         )}
       >
         {hero.featuredImage && (
           <div {...inspectorProps({ fieldId: 'featuredImage' })}>
-            <div className="absolute bottom-0 h-1/2 w-full bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-300 lg:opacity-0 lg:group-hover:opacity-100" />
+            <div className="absolute bottom-0 h-1/2 w-full bg-gradient-to-t from-black/80 to-transparent transition-opacity duration-300 xl:opacity-0 xl:group-hover:opacity-100" />
             <span
               style={{ textShadow: '4px 4px black' }}
-              className={`${myFont.className} absolute bottom-[0px] left-[10px] text-4xl font-bold leading-10 tracking-widest text-amber-300 mix-blend-luminosity transition-opacity duration-300 [word-spacing:-5px] lg:opacity-0 lg:group-hover:opacity-100`}
+              className={`${myFont.className} absolute bottom-[0px] left-[10px] text-4xl font-bold leading-10 tracking-widest text-amber-300 mix-blend-luminosity transition-opacity duration-300 [word-spacing:-5px] xl:opacity-0 xl:group-hover:opacity-100`}
             >
               {hero.name}
             </span>
