@@ -21,7 +21,7 @@ export const HeroView = ({ hero }: Props) => {
     setIsClient(true);
   }, []);
 
-  const calculatedHash = !isClient || hash === 'description' ? 'description' : hash;
+  const calculatedHash = !isClient || !hash || hash === 'description' ? 'description' : hash;
 
   const renderAvatar = (className: ComponentProps<'div'>['className']) => {
     return (
