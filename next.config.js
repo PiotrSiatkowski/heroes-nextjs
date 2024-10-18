@@ -1,4 +1,3 @@
-const dotenv = require('dotenv').config();
 const nextComposePlugins = require('next-compose-plugins');
 
 const headers = require('./config/headers');

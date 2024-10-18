@@ -4,12 +4,12 @@ import { useTranslation } from 'next-i18next';
 
 import { getServerSideTranslations } from './utils/get-serverside-translations';
 
-import { HeroView, HeroTileGrid } from 'src/components/features/hero';
 import { SeoFields } from '@src/components/features/seo';
 import { Container } from '@src/components/shared/container';
 import { PageHeroFieldsFragment, PageHeroOrder } from '@src/lib/__generated/sdk';
 import { client, previewClient } from '@src/lib/client';
 import { revalidateDuration } from '@src/pages/utils/constants';
+import { HeroView, HeroTileGrid } from 'src/components/features/hero';
 
 const Page = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { t } = useTranslation();
@@ -33,7 +33,11 @@ const Page = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
       <div className="bg-cover">
         <Container className="py-4 md:mb-10 lg:mb-16 lg:py-8">
           <h2 className="mb-4 md:mb-6">{t('landingPage.latestArticles')}</h2>
-          <HeroTileGrid className="md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" heroes={heroes} />
+          <HeroTileGrid
+            className="md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+            heroes={heroes}
+            current={hero.slug}
+          />
         </Container>
       </div>
     </>
@@ -45,7 +49,7 @@ export const getStaticProps: GetStaticProps<{
   heroes: Array<({ __typename?: 'PageHero' } & PageHeroFieldsFragment) | null> | undefined;
 }> = async ({ params = {}, locale, draftMode: preview }) => {
   try {
-    if (!params?.slug || !locale) {
+    if (!params?.slug || params.slug === '<no source>' || !locale) {
       return {
         notFound: true,
         revalidate: revalidateDuration,
@@ -65,9 +69,6 @@ export const getStaticProps: GetStaticProps<{
         locale,
         order: PageHeroOrder.PublishedDateDesc,
         preview,
-        where: {
-          slug_not: params.slug.toString(),
-        },
       }),
     ]);
 

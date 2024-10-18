@@ -6,9 +6,10 @@ import { PageHeroFieldsFragment } from '@src/lib/__generated/sdk';
 
 interface Props extends HTMLProps<HTMLDivElement> {
   heroes?: Array<PageHeroFieldsFragment | null>;
+  current?: string | null;
 }
 
-export const HeroTileGrid = ({ heroes, className, ...props }: Props) => {
+export const HeroTileGrid = ({ heroes, current, className, ...props }: Props) => {
   return heroes && heroes.length > 0 ? (
     <div
       className={twMerge(
@@ -18,7 +19,7 @@ export const HeroTileGrid = ({ heroes, className, ...props }: Props) => {
       {...props}
     >
       {heroes.map((hero, index) => {
-        return hero ? <HeroTile key={index} hero={hero} /> : null;
+        return hero ? <HeroTile key={index} hero={hero} current={current} /> : null;
       })}
     </div>
   ) : null;
