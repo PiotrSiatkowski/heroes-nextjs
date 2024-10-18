@@ -92,7 +92,7 @@ export const HeroView = ({ hero }: Props) => {
         <div className="flex aspect-square w-1/6 flex-col items-center justify-center" />
         <Link
           href={{ hash: 'description' }}
-          className="flex aspect-square w-1/6 flex-col items-center justify-center border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-125"
+          className="flex aspect-square w-1/6 flex-col items-center justify-center border-2 border-[#2c2e2e] transition-transform hover:z-50 hover:scale-[1.15]"
         >
           <div
             className={`group flex h-full w-full items-center justify-center text-4xl ${
@@ -108,7 +108,7 @@ export const HeroView = ({ hero }: Props) => {
 
   const renderSkillBox = (skill, image) => {
     return (
-      <div className="relative aspect-square w-1/6 border-2 border-[#2c2e2e] bg-black transition-transform hover:z-50 hover:scale-125 md:w-[10%]">
+      <div className="relative aspect-square w-1/6 border-2 border-[#2c2e2e] bg-black transition-transform hover:z-50 hover:scale-[1.15] md:w-[10%]">
         {hero.skill1Image && (
           <Link href={{ hash: skill }}>
             <div className={calculatedHash === skill ? undefined : 'opacity-50 hover:opacity-70'}>
