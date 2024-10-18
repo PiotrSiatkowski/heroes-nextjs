@@ -16,10 +16,15 @@ export const HeroView = ({ hero }: Props) => {
   const hash = asPath.split('#')[1];
   const inspectorProps = useContentfulInspectorMode({ entryId: hero.sys.id });
   const [isClient, setIsClient] = useState(false);
+  const [heroHasLoaded, setHeroHasLoaded] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    setHeroHasLoaded(false);
+  }, [hero]);
 
   const calculatedHash = !isClient || !hash || hash === 'skill-1' ? 'skill-1' : hash;
 
@@ -131,19 +136,26 @@ export const HeroView = ({ hero }: Props) => {
 
   return (
     <div className="flex flex-col overflow-hidden border-4 border-[#2c2e2e] shadow-lg md:max-w-[700px] 2xl:max-w-none 2xl:flex-row">
-      <div className="flex-1 basis-1/2" {...inspectorProps({ fieldId: 'featuredImage' })}>
-        {hero.featuredImage && (
-          <CtfImage
-            nextImageProps={{
-              className: 'w-full',
-              priority: true,
-              sizes: undefined,
-              width: 700,
-              height: 700,
-            }}
-            {...hero.featuredImage}
-          />
-        )}
+      <div className="flex-1 basis-1/2 bg-black" {...inspectorProps({ fieldId: 'featuredImage' })}>
+        <div
+          className={`transition-opacity duration-500 ${
+            heroHasLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          {hero.featuredImage && (
+            <CtfImage
+              nextImageProps={{
+                onLoadingComplete: () => setHeroHasLoaded(true),
+                className: 'w-full',
+                priority: true,
+                sizes: undefined,
+                width: 700,
+                height: 700,
+              }}
+              {...hero.featuredImage}
+            />
+          )}
+        </div>
       </div>
       <div className="relative flex flex-1 basis-1/2 bg-[#0e191a]">
         <div
