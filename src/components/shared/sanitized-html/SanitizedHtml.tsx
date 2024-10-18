@@ -17,5 +17,5 @@ interface Props {
 }
 
 export const SanitizedHTML = ({ html, options }: Props) => (
-  <div suppressHydrationWarning dangerouslySetInnerHTML={sanitize(html, options)} />
+  <span suppressHydrationWarning dangerouslySetInnerHTML={sanitize(html, options)} />
 );
